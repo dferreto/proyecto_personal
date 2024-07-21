@@ -1,0 +1,92 @@
+/* Acá va lo principal de la página */
+  
+.boton1{
+     
+    font-family: "Reboto", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    background: rgb(93, 202, 68) !important;
+    width: 160px;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #3B643B;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgb(31, 102, 17);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+    top: 50%;
+  
+  }
+  
+
+
+  .card-group{
+    width: 50%;
+    margin: 0 auto; 
+  }
+
+
+  .lineaCafe{
+    background-color: saddlebrown;
+  }
+
+  .text{
+    background-color: rgb(35, 143, 35);
+    text-decoration: #fff;
+  }
+
+    /* CIRCULOS*/
+    :root {
+        /* Definición de variables */
+        --card-bg-color: #e0e0e0; /* Color de fondo del círculo */
+        --label-bg-color: rgb(93, 202, 68); /* Color de fondo de la etiqueta */
+        --label-text-color: white; /* Color del texto */
+        --card-width: 150px; /* Ancho de la tarjeta */
+        --card-height: 150px; /* Altura de la tarjeta */
+        --label-padding: 5px 0; /* Relleno de la etiqueta */
+        --label-border-radius: 20px; /* Radio de borde de la etiqueta */
+        --container-gap: 20px; /* Espacio entre tarjetas */
+      }
+      
+  .tarjeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--container-gap);
+    justify-content: center;
+  }
+  
+  .cardIndividual {
+    border-radius: 50%;
+    overflow: hidden;
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-bg-color);
+  }
+  
+  .cardIndividual img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .cardIndividual .label {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--label-text-color);
+    font-weight: bold;
+    background-color: var(--label-bg-color);
+    border-radius: var(--label-border-radius);
+    padding: var(--label-padding);
+  }

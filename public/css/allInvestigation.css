@@ -1,0 +1,54 @@
+/* Estilos personalizados para mejorar las tarjetas */
+.card {
+    transition: transform 0.2s; /* Transición suave para el efecto de hover */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse sobre la tarjeta */
+    border: none; /* Opcional: elimina el borde para un diseño más limpio */
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+  }
+  
+  .card:hover {
+    transform: scale(1.05); /* Efecto de crecimiento al pasar el mouse */
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column; /* Organiza el contenido en una columna */
+  }
+  
+  .card-title {
+    color: #2a4d69 !important;
+    margin-bottom: 1rem;
+  }
+
+  .card-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-title a:hover {
+  color: #0056b3;
+}
+  
+  .card-subtitle {
+    font-size: 0.9em; /* Un tamaño de fuente más pequeño para el subtítulo */
+    margin-bottom: 1rem; /* Espacio debajo del subtítulo */
+  }
+  
+  .card-text {
+    flex-grow: 1; /* Permite que el texto de la tarjeta ocupe todo el espacio vertical disponible */
+    font-size: 0.8em; /* Un tamaño de fuente más pequeño para el texto del cuerpo */
+  }
+  
+  .card-header-custom {
+    background: #f4f4f9; /* Un color de fondo suave */
+    border-bottom: 1px solid #eaecef; /* Una línea sutil para separar el encabezado del cuerpo de la tarjeta */
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    padding: .75rem 1.25rem; /* Espaciado estándar para Bootstrap */
+  }
+  
+  .card-body-custom {
+    padding: .75rem 1.25rem;
+  }
+  
+  

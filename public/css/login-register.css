@@ -1,0 +1,75 @@
+.icon-Image {
+    height: 7rem;
+}
+
+.icon-Input {
+    height: auto;
+    width: 18px;
+}
+
+.icon-Google {
+    height: 1.6rem;
+}
+
+.form-control.large-input {
+    height: 3em; /* o cualquier valor que prefieras */
+}
+
+.size-Card {
+    width: 28rem;
+}
+
+.remember {
+    font-size: 0.9rem;
+}
+
+.forgot-Password {
+    font-size: 0.9rem;
+}
+
+.div_or {
+    height: 0.9rem;
+}
+
+.color-button{
+    background-color: #75C7BF;
+}
+
+.color-button:hover{
+    background-color: #F2B705;
+}
+
+.color-icon{
+    background-color: #75C7BF;
+}
+
+.text-color{
+    color: #75C7BF;
+}
+
+.text-color:hover{
+    color: #F2B705;
+}
+
+.fondo-b{
+    
+    display: flex; /* O 'grid' si prefieres usar Grid Layout */
+    flex-direction: column; /* Alinea los hijos en una columna */
+    min-height: 100vh; /* Asegura que el body sea al menos tan alto como la ventana del navegador */
+    flex-grow: 1
+}
+
+.fondo-b::before {
+    content: ''; /* Necesario para que se renderice el pseudo-elemento */
+    position: absolute; /* Posiciona absolutamente el pseudo-elemento */
+    top: 0; /* Alinea la parte superior del pseudo-elemento con la parte superior del body */
+    left: 0; /* Alinea el lado izquierdo del pseudo-elemento con el lado izquierdo del body */
+    right: 0; /* Alinea el lado derecho del pseudo-elemento con el lado derecho del body */
+    bottom: 35px;
+    background-image: url('../img/login/fondo-background.jpeg'); /* Sustituye con la ruta de tu imagen */
+    background-size: cover; /* Cubre completamente el área del pseudo-elemento */
+    background-position: center; /* Centra la imagen en el pseudo-elemento */
+    background-repeat: no-repeat; /* Asegura que la imagen no se repita */
+    filter: blur(2px); /* Aplica el efecto de desenfoque */
+    z-index: -1; /* Coloca el pseudo-elemento detrás del contenido del body */
+  }

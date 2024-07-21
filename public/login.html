@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta value="no-cache, no-store, must-revalidate" name="no-chache">
+
+    <!-- Font Awesone kit, basic kit york license -->
+    <script src="https://kit.fontawesome.com/2c7bfef965.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
+    
+    <!-- Custom style -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login-register.css">
+
+    <!-- call menu and footer sections -->
+    <script src="sections/menu.js" defer></script>
+    <script src="sections/footer.js" defer></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.5.2/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/10.5.2/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.5.2/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.5.2/firebase-firestore-compat.js"></script>
+
+    <!-- initilized firebase object -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <title>Autenticación de Usuario</title>
+</head>
+
+
+
+<body class="container-fluid fondo-b">
+    <header>
+        <menu-component></menu-component>
+    </header>
+
+<main class="d-flex justify-content-center align-items-center vh-100">
+    <div class="bg-light p-5 rounded-5 text-secondary size-Card border bg-">
+        <div class="d-flex justify-content-center">
+            <img class="icon-Image bg" src="img/login/login-icon.svg" alt="login-icon">
+        </div>
+        <div class="input-group mt-4">
+            <div class="input-group-text color-icon ">
+                <img class="icon-Input" src="img/login/email-icon.svg" alt="username-icon">
+            </div>
+            <input class="form-control" type="email" placeholder="Correo electrónico" id="txtEmail" required autofocus>
+        </div>
+        <div class="input-group mt-2">
+            <div class="input-group-text color-icon">
+                <img class="icon-Input" src="img/login/password-icon.svg" alt="password-icon">
+            </div>
+            <input class="form-control" type="password" placeholder="Contraseña" id="txtContra" required>
+        </div>
+        <div class="d-flex justify-content-around mt-1">
+            <div class="d-flex align-items-center gap-1">
+               <input class="form-check-input" type="checkbox"> 
+               <div class="remember pt-1">Remember me</div>
+            </div>
+            <div class="pt-1">
+                <a href="#" class="text-decoration-none text-color fw-semibold fst-italic forgot-Password">Forgot your password?</a>
+            </div>
+        </div>
+        <div class="btn color-button text-white w-100 mt-4 fw-semibold shadow-sm" id="btnLogin" name="btnLogin">Login</div>
+        <div class="d-flex gap-1 justify-content-center mt-1">
+            <div>Don't have an account?</div>
+            <a href="signup.html" class="text-decoration-none text-color fw-semibold">Register</a>
+        </div>
+    
+       
+        
+    </div>
+</main>
+
+
+
+<!-- load js code to storage data  -->
+<script defer src="js/user/login.js"></script>
+
+
+</body>
+
+<footer>
+    <footer-component></footer-component>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</footer>
+
+</html>

@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{datosUsuarios}/{document=**}{
+      allow read:if true;
+      allow create: if request.resource.data.idemp is string &&
+                       request.resource.data.usuario is string &&
+                       request.resource.data.email is string &&
+                       request.resource.data.gradoAcademico is string &&
+                       request.resource.data.descripcion is string &&
+                       request.resource.data.urlPhoto is string;
+      allow update: if true;
+      allow delete: if false;
+    }
+
+   match /{datosInvestigacion}/{document=**} {
+    allow read: if true;
+    allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    allow create: if request.auth != null && request.resource.data.userId == request.auth.uid &&
+                    request.resource.data.titulo is string &&
+                    request.resource.data.area is string &&
+                    request.resource.data.descripcion is string &&
+                    request.resource.data.urlPdf is string &&
+                    request.resource.data.urlImages is list &&
+                    request.resource.data.urlImages.size() > 0 && 
+                    request.resource.data.urlImages.size() <= 6 &&
+                    request.resource.data.conclusion is string &&
+                    request.resource.data.recomendacion is string;
+  }
+
+  match /{comentarios}/{document=**} {
+    allow read: if true;
+    allow create: if request.resource.data.texto is string;
+    allow update, delete: if request.auth != null &&
+                            resource.data.userId == request.auth.uid;
+}
+
+  }
+}

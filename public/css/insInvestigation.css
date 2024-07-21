@@ -1,0 +1,21 @@
+.form-select{
+    height: auto;
+    padding: 0.5rem 1rem;
+    width: auto;
+}
+
+  .table {
+    width: 50%; 
+    table-layout: fixed; 
+  }
+
+  input[type="text"], 
+  input[type="file"], 
+  textarea {
+    width: 100%; 
+    box-sizing: border-box; 
+  }
+
+  input[type="button"] {
+    width: auto; 
+  }

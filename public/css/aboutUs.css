@@ -1,0 +1,55 @@
+.bio-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bio-header h1 {
+    text-align: center;
+    color: #2c5d63;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.bio-content {
+    text-align: center;
+    color: #333;
+}
+
+.bio-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.bio-images {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.bio-image {
+    flex: 1;
+    max-width: calc(100% - 1rem);
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .bio-image {
+        max-width: 100%;
+    }
+}
+
+/* Para pantallas más grandes */
+@media (min-width: 1200px) {
+    .bio-content p {
+        font-size: 1.25rem;
+    }
+}

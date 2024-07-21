@@ -1,0 +1,47 @@
+.add-investigation {
+    background: linear-gradient(to right, #007bff, #4b9cd3);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.5);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .add-investigation:hover, .add-investigation:focus {
+    background: linear-gradient(to right, #0069d9, #3a87c2);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .add-investigation:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 123, 255, 0.5);
+  }
+
+  .categoria-imagen {
+    width: 100px; /* Ancho fijo para todas las imágenes */
+    height: 100px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Esto asegura que la imagen se recorte para ajustarse al tamaño, sin distorsionar */
+    border-radius: 5px; /* Opcional: bordes redondeados */
+    margin: 5px; /* Añade un margen alrededor de cada imagen */
+    display: inline-block;
+}
+
+td {
+  text-align: center; /* Centrar texto horizontalmente */
+  vertical-align: middle; /* Centrar texto verticalmente */
+  padding: 10px; /* Añadir algo de espacio alrededor del contenido dentro de las celdas */
+  word-wrap: break-word; /* Asegurarse de que el texto no desborde la celda */
+  max-width: 150px; /* Poner un máximo ancho a las celdas para forzar el ajuste de texto */
+}
+
+
+
+
+
+
+
+  
