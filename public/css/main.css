@@ -1,10 +1,16 @@
 
-body {
-    background: url('../img/principal/bg.jpg') rgba(0, 0, 0, 0.3);
-    background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    background-position: center; /* Centra la imagen */
-    background-blend-mode: multiply;
+
+
+@media (max-width: 991px) {
+    .sidebar {
+     background-color: rgba(255, 255, 255, 0.15);
+     backdrop-filter: blur(10px);
+    }
+     
+   }
+
+.signupButton{
+    background-color: #6997BF;
 }
 
 .navbar {
@@ -13,6 +19,11 @@ body {
     align-items: center;
 }
 
+#userMenuButton {
+    color: white;
+    border-color: white; /* Si estás usando un borde en el botón */
+  }
+
 .navbar-nav {
     margin-right: auto; /* Empuja el contenido de la derecha hacia la izquierda */
 }
@@ -20,14 +31,6 @@ body {
 .posicion-menu, .usuario {
     margin-left: auto; /* Empuja estos elementos hacia el final del contenedor */
 }
-
-@media (max-width: 991px) {
-   .sidebar {
-    backdrop-filter: blur(10px);
-   }
-    
-  }
-
 
 .etiqueta {
     background-color: #F0C229;
