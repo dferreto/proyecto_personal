@@ -1,4 +1,12 @@
 /* Acá va lo principal de la página */
+
+body {
+  background: url('../img/principal/bg.jpg') rgba(0, 0, 0, 0.7);
+  background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen */
+  background-blend-mode: multiply;
+}
   
 .boton1{
      
