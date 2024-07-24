@@ -1,24 +1,33 @@
-* {
-    margin: 0;
-}
 
-html,
 body {
-    height: 100%;
-    padding-top: 60px;
-    padding-left: 25px;
-    padding-right: 25px;
-      
+    background: url('../img/principal/bg.jpg') rgba(0, 0, 0, 0.3);
+    background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen */
+    background-blend-mode: multiply;
 }
 
-.linea_sep {
-    margin-top: 10px;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.centrar {
-    margin-left: auto;
-    margin-right: auto;
+.navbar-nav {
+    margin-right: auto; /* Empuja el contenido de la derecha hacia la izquierda */
 }
+
+.posicion-menu, .usuario {
+    margin-left: auto; /* Empuja estos elementos hacia el final del contenedor */
+}
+
+@media (max-width: 991px) {
+   .sidebar {
+    backdrop-filter: blur(10px);
+   }
+    
+  }
+
 
 .etiqueta {
     background-color: #F0C229;
@@ -114,18 +123,11 @@ body {
     #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
 }
 
-.fondo-menu {
-    background-color: #98E5DB;
-}
+
 
 .fondo-footer{
     background-color: white;
 }
-
-.posicion-menu {
-    transform: translateY(20%); /* Use transform to accurately center the element */
-    right: 22px;        /* Add some space between the dropdown and the image */
-  }
 
 
 .invitado{
@@ -142,3 +144,14 @@ body {
     margin: 5px;
   }
 
+.logo {
+    margin-left: 70px;
+}
+
+.menu-derecha {
+    margin-left: 100px; /* Mueve el menú hacia la derecha */
+}
+
+.usuario {
+    margin-right: 40px;
+}
