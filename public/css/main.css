@@ -1,16 +1,17 @@
-
-
-
 @media (max-width: 991px) {
     .sidebar {
-     background-color: rgba(255, 255, 255, 0.15);
-     backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
     }
-     
-   }
+}
 
-.signupButton{
+.signupButton {
     background-color: #6997BF;
+}
+
+.signupButton:hover {
+    background-color: white;
+    color: #6997BF !important;
 }
 
 .navbar {
@@ -22,7 +23,7 @@
 #userMenuButton {
     color: white;
     border-color: white; /* Si estás usando un borde en el botón */
-  }
+}
 
 .navbar-nav {
     margin-right: auto; /* Empuja el contenido de la derecha hacia la izquierda */
@@ -32,17 +33,6 @@
     margin-left: auto; /* Empuja estos elementos hacia el final del contenedor */
 }
 
-.etiqueta {
-    background-color: #F0C229;
-    border: 1px solid black;
-    display: block;
-    width: 100px;
-}
-
-.contenido {
-    min-height: calc(100% - 5rem);
-}
-
 .login {
     margin-left: auto;
     margin-right: auto;
@@ -50,41 +40,18 @@
     min-width: 380px;
 }
 
-.tarjeta {
-    border: none !important;
-}
-
-.pie {
-    border-top: 2px rgb(66, 66, 66) solid;
-    font-size: 12px;
-    height: 4.5rem;
-    padding-top: 10px;
-}
-
-.div_pi {
-    float: left;
-    text-align: left;
-    width: 33%;
-}
-
-.div_pc {
-    border-left: 1px rgb(66, 66, 66) solid;
-    border-right: 1px rgb(66, 66, 66) solid;
-    float: left;
-    font-weight: bold;
-    text-align: center;
-    width: 33%;
-}
-
 .redes-containar {
-    display: flex;  
-    text-align: right;
-    width: 33%;
-    align-items: center;
-    justify-content: center;
+    text-align: justify; 
 }
 
-.redes-containar ul li{
+.redes-containar ul {
+    display: inline-flex; /* Cambia a inline-flex para alinear los íconos en línea */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+    margin: 1rem 0 0 0; /* Añade un margen superior para separar del texto */
+    justify-content: center; /* Centra los íconos en el contenedor */
+}
+
+.redes-containar ul li {
     display: inline-block;
     margin: 0 5px;
     width: 50px;
@@ -92,7 +59,7 @@
     text-align: center;
 }
 
-.redes-containar ul li a{
+.redes-containar ul li a {
     display: block;
     padding: 0 10px;
     background: #333;
@@ -103,49 +70,33 @@
     transition: .2s;
 }
 
-.redes-containar ul:hover a{
+.redes-containar ul:hover a {
     filter: blur(2px);
 }
 
-.redes-containar ul li a:hover{
+.redes-containar ul li a:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 5px 5px 0px rgba(0, 0, 0, .4);
     filter: none;
 }
 
-.redes-containar ul li .facebook:hover{
+.redes-containar ul li .facebook:hover {
     background-color: #4267B2;
 }
 
-.redes-containar ul li .twitter:hover{
-    background-color: #000000;
+.redes-containar ul li .linkedin:hover {
+    background-color: #0965C1;
 }
 
-.redes-containar ul li .instagram:hover{
-    background: radial-gradient(circle at 33% 100%, #fed373 4%,
-    #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
+.redes-containar ul li .instagram:hover {
+    background: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
 }
 
-
-
-.fondo-footer{
-    background-color: white;
+footer {
+    color: #000;
+    position: relative;
+    width: 100%;
 }
-
-
-.invitado{
-    color: #000000;
-}
-
-.invitado:hover{
-    color: #FAAE1C;
-}
-
-.img-preview {
-    max-width: 100px; /* Ajusta según necesites */
-    height: auto;
-    margin: 5px;
-  }
 
 .logo {
     margin-left: 70px;

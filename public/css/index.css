@@ -13,70 +13,41 @@ body {
     font-family: "Reboto", sans-serif;
     font-size: 18px;
     font-weight: bold;
-    background: rgb(93, 202, 68) !important;
-    width: 160px;
+    background: white;
+    width: 250px;
     padding: 20px;
-    text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-    color: #3B643B;
+    color: rgb(53, 51, 51);
     border-radius: 5px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgb(31, 102, 17);
+    box-shadow: 0 0 10px rgb(0, 123, 255, 0.5);
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
     -webkit-transition-property: box-shadow, transform;
-    transition-property: box-shadow, transform;
-    top: 50%;
+    transition-property: box-shadow, transform;  
+  }
+
+  .button-container {
+    position: fixed; /* Posiciona el contenedor de forma fija */
+    bottom: 50px; /* Ajusta el espacio desde el borde inferior */
+    right: 200px; /* Ajusta el espacio desde el borde derecho */
+  }
+
   
+
+.boton1:hover, .add-investigation:focus {
+    background: linear-gradient(to right, #0069d9, #3a87c2);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .boton1:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 123, 255, 0.5);
   }
 
-
-  .card-group{
-    width: 25%;
-    margin: 0 auto; 
-  }
-
-
-  .text{
-    background-color: rgb(35, 143, 35);
-    text-decoration: #fff;
-  }
-
-  .img-fluid {
-    width: auto; /* Hace que la imagen ocupe todo el ancho del contenedor */
-    max-height: 700px; /* Ajusta esta altura según sea necesario */
-
-    border-radius: 5px; /* Mantiene las esquinas redondeadas */
-}
-
-.card {
-  text-align: center;
-}
-
-.imagenCentro img {
-  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
-  display: block; /* Elimina el espacio en línea debajo de la imagen */
-  border: none; /* Elimina cualquier borde de la imagen */
-  border-radius: 0; /* Elimina el redondeo en las esquinas */
-}
-
-
-.imagenCentro img {
-  width: 100%; /* Ocupa todo el ancho del contenedor */
-  height: auto; /* Mantiene la proporción de la imagen */
-  display: block; /* Elimina el espacio en línea debajo de la imagen */
-  border: none; /* Elimina cualquier borde de la imagen */
-}
-
-
-.container-fluid {
-    padding: 0; /* Elimina el padding horizontal */
-}
-
-
-
+ 
 
 
 

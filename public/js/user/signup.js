@@ -15,8 +15,42 @@ const txtDescripcion = document.querySelector('#txtDescripcion');
 // create local insert button
 const btnInsUser = document.querySelector('#btnInsUser');
 
+// List of allowed email domains
+const allowedDomains = [
+    'gmail.com',
+    'outlook.com',
+    'hotmail.com',
+    'live.com',
+    'yahoo.com',
+    'aol.com',
+    'zoho.com',
+    'protonmail.com',
+    'icloud.com',
+    'mail.com',
+    'gmx.com',
+    'tutanota.com',
+    'est.utn.ac.cr'
+];
+
+// Function to validate email domain
+function isValidEmailDomain(email) {
+    const domain = email.split('@')[1];
+    return allowedDomains.includes(domain);
+}
+
 // assign button listener
 btnInsUser.addEventListener('click', function () {
+    const email = txtEmail.value;
+
+    if (!isValidEmailDomain(email)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'El dominio del correo electrónico no está permitido. Solo se permiten dominios específicos.',
+            icon: 'error'
+        });
+        return;
+    }
+
     const archivo = txtUrlPhoto.files[0];
     const nomarch = archivo.name;
     if (archivo == null) {
@@ -29,7 +63,7 @@ btnInsUser.addEventListener('click', function () {
         subir.then(snapshot => snapshot.ref.getDownloadURL())
             .then(url => {
                 // Crear usuario con email y contraseña
-                auth.createUserWithEmailAndPassword(txtEmail.value, txtContra.value)
+                auth.createUserWithEmailAndPassword(email, txtContra.value)
                     .then((userCredential) => {
                         const user = userCredential.user;
                         // Guardar datos del usuario en Firestore
@@ -42,7 +76,7 @@ btnInsUser.addEventListener('click', function () {
                             "urlPhoto": url
                         }).then(function (docRef) {
                             Swal.fire({
-                                title: '¡Registro Completo!',
+                                title: '¡Registro Exitoso!',
                                 text: 'ID del registro: ' + docRef.id,
                                 icon: 'success',
                                 confirmButtonText: 'Ok'
