@@ -22,7 +22,6 @@
 
     <!-- Custom style -->
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/aboutUs.css">
 
 
@@ -46,46 +45,42 @@
     <title>Inicio</title>
 </head>
 
-<body class="container-fluid" >
-<header>
-    <menu-component></menu-component>
-</header>
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <menu-component></menu-component>
+    </header>
 
-
-<main>
-
-    <section class="bio-container">
-        <div class="bio-header">
-            <h1>Explorando la informatica</h1>
-        </div>
-        <div class="bio-content">
-            <p>
-                "Bienvenidos a nuestra biblioteca destinada al mundo de la tecnología, 
-                una iniciativa educativa impulsada por un equipo dedicado de estudiantes de la Universidad Técnica Nacional: 
-                Melanie Rodríguez Jiménez, Dinnier Ferreto Moraga. Unidos por nuestra pasión, hemos creado esta plataforma para ofrecer un acceso interactivo 
-                y comprensible al estudio de la informatica. Nuestro objetivo es trascender los límites tradicionales del aprendizaje, 
-                proporcionando recursos educativos innovadores, herramientas interactivas y contenido actualizado que inspire y eduque a 
-                estudiantes, profesionales y entusiastas de la informatica por igual."
-            </p>
-            <div class="bio-images">
-                <img src="img/nosotros/fotos.jpeg" alt="Equipo" class="bio-image">
-                <img src="img/principal/NOSOTROS.jpeg" alt="Nosotros" class="bio-image">
-                
+    <main class="flex-shrink-0">
+        <section class="bio-container container py-5">
+            <div class="bio-header text-center">
+                <h1>Explorando la informática</h1>
             </div>
-        </div>
-    </section>
-    
+            <div class="bio-content text-center">
+                <p class="mb-4">
+                    "Bienvenidos a nuestra biblioteca destinada al mundo de la tecnología, 
+                    una iniciativa educativa impulsada por un equipo dedicado de estudiantes de la Universidad Técnica Nacional: 
+                    Melanie Rodríguez Jiménez, Dinnier Ferreto Moraga. Unidos por nuestra pasión, hemos creado esta plataforma para ofrecer un acceso interactivo 
+                    y comprensible al estudio de la informática. Nuestro objetivo es trascender los límites tradicionales del aprendizaje, 
+                    proporcionando recursos educativos innovadores, herramientas interactivas y contenido actualizado que inspire y eduque a 
+                    estudiantes, profesionales y entusiastas de la informática por igual."
+                </p>
+                <div class="bio-images">
+                    <img src="img/nosotros/fotos.jpeg" alt="Equipo" class="bio-image">
+                    <img src="img/principal/NOSOTROS.jpeg" alt="Nosotros" class="bio-image">
+                    
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <footer class="mt-auto">
+        <footer-component></footer-component>
+    </footer>
 
-<footer>
-    <footer-component></footer-component>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script defer src="js/user/user-state-updater.js"></script>
+    <script defer src="js/user/authen.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</footer>
-
-<script defer src="js/user/user-state-updater.js"></script>
-<script defer src="js/user/authen.js"></script>
 </body>
 
 </html>
