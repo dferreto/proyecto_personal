@@ -10,7 +10,6 @@ const txtEmail = document.querySelector('#txtEmail');
 const txtContra = document.querySelector('#txtContra');
 const txtUrlPhoto = document.querySelector('#txtUrlPhoto');
 const txtGradoAcademico = document.querySelector('#txtGradoAcademico');
-const txtDescripcion = document.querySelector('#txtDescripcion');
 const txtVerification = document.querySelector('#txtVerification')
 
 // create local insert button
@@ -21,15 +20,8 @@ const allowedDomains = [
     'gmail.com',
     'outlook.com',
     'hotmail.com',
-    'live.com',
-    'yahoo.com',
-    'aol.com',
-    'zoho.com',
     'protonmail.com',
     'icloud.com',
-    'mail.com',
-    'gmx.com',
-    'tutanota.com',
     'est.utn.ac.cr'
 ];
 
@@ -44,16 +36,17 @@ function isValidPassword(password) {
     return passwordReq.test(password)
 }
 
+
+
 // assign button listener
 btnInsUser.addEventListener('click', function () {
     const email = txtEmail.value;
     const password = txtContra.value;
-    const descripcion = txtDescripcion.value;
     const passwordVerification = txtVerification.value;
     const nombre = txtNombre.value;
     const gradoAcademico = txtGradoAcademico.value;
 
-    if (nombre === '' || email === '' || password === '' || passwordVerification === '' || descripcion === '' || passwordVerification === '' || gradoAcademico === 'Selecciona grado académico') {
+    if (nombre === '' || email === '' || password === '' || passwordVerification === '' || passwordVerification === '' || gradoAcademico === 'Selecciona grado académico') {
         Swal.fire({
             title: 'Error',
             text: 'Todos los campos son obligatorios. Por favor, completa todos los campos.',
@@ -110,7 +103,6 @@ btnInsUser.addEventListener('click', function () {
                             "usuario": txtNombre.value,
                             "email": user.email,
                             "gradoAcademico": txtGradoAcademico.value,
-                            "descripcion": txtDescripcion.value,
                             "urlPhoto": url
                         }).then(function (docRef) {
                             Swal.fire({
@@ -146,6 +138,8 @@ btnInsUser.addEventListener('click', function () {
                 });
             });
     }
+
+
 });
 
 function limpiar() {
@@ -154,6 +148,5 @@ function limpiar() {
     txtVerification.value= '';
     txtContra.value= '';
     txtGradoAcademico.value = '';
-    txtDescripcion.value = '';
     txtUrlPhoto.value = '';
 }
