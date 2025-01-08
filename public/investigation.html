@@ -27,7 +27,6 @@
 
     <!-- call menu and footer sections -->
     <script src="sections/menu.js" defer></script>
-    <script src="sections/footer.js" defer></script>
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/10.5.2/firebase-app-compat.js"></script>
@@ -50,7 +49,7 @@
     <title>Listado de investigaciones</title>
 </head>
 
-<body class="container-fluid" onload="validar()">
+<body class="vh-100 overflow-hidden" onload="validar()">
     <header>
         <menu-component></menu-component>
     </header>
@@ -63,17 +62,14 @@
     <button type="button" class="btn btn-sm btn-primary add-investigation" onClick="insInvest()">Agregar investigación</button>
 </main>
 
-<footer>
-    <footer-component></footer-component>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</footer>
+
 
 <!-- load js code to storage data  -->
 <script defer src="js/investigation/lstInvestigations.js"></script>
 <script defer src="js/user/user-state-updater.js"></script>
 <script defer src="js/user/authen.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>
 
