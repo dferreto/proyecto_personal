@@ -26,7 +26,7 @@
 
     <!-- call menu and footer sections -->
     <script src="sections/menu.js" defer></script>
-    <script src="sections/footer.js" defer></script>
+
 
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/10.5.2/firebase-app-compat.js"></script>
@@ -56,115 +56,23 @@
     <title>Inicio</title>
 </head>
 
-<body class="container-fluid" >
+<body class="vh-100 overflow-hidden" >
 <header>
     <menu-component></menu-component>
 </header>
 
 <main>
-    <div class="imagenCentro">
-        <img src="img/principal/BIOLOGIA.png" class="img-fluid" alt="" max-width: 100%>
-    </div>
-
-
-    <div class="lineaCafe">
-        <div class="lineaCafe1">
-            <hr style=" height: 40px; background-color: rgb(99, 58, 58);" />
-        </div>
-
-
-    </div>
-    <div class="mt-5 card-group carousel-inner >.item > img object-fit: scale-down; height: 50vh; width: 50%; ">
-        <div class="card">
-            <img src="img/principal/pajaro.jpeg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">TUCÁN</h5>
-                <p class="card-text">Se caracterizan por poseer un pico muy desarrollado y de vivos colores. Miden entre
-                    18 y 65 cm.
-                </p>
-
-            </div>
-        </div>
-
-        
-        <div class="card">
-            <img src="img/principal/NOSOTROS.jpeg" class="" alt="">
-            <div class="card-body">
-                <h5 class="card-title">SOBRE NOSOTROS</h5>
-                <p class="card-text">Estudiantes de la Universidad Técnica Nacional, en busca de una mayor facilidad
-                    de aprendizaje.
-                </p>
-                <div class="d-flex justify-content-center "><a href="aboutUs.html" class="boton1 btn btn-primary btn-1 mt-4 ">LEER
-                        +</a></div>
-            </div>
-        </div>
-        <div class="card">
-            <img src="img/principal/tortugas.jpeg" class="card-img-top" alt="...">
-            <div class="card-body ">
-                <h5 class="card-title ">TORTUGAS</h5>
-                <p class="card-text">Se puede encontrar en los mares tropicales y subtropicales.
-                    Su nombre se debe a la capa de grasa que puede encontrarse bajo su caparazón.
-                </p>
-
-
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <section class="container">
-        <h1 class="text text-center">EL MUNDO DE LA CIENCIA</h1>
-        <div class="imgP col-12 d-flex justify-content-center align-items-center ">
-            <img src="" alt="" width="150%" />
-        </div>
-    </section>
-    <br>
-    <br>
-
-    <div class="tarjeta mb-3">
-        <div class="cardIndividual">
-            <img src="img/principal/circulo1.jpeg" alt="primaria">
-            <div class="label">Diferentes</div>
-        </div>
-
-    </div>
-
-
-    <div class="tarjeta">
-        <div class="cardIndividual">
-            <img src="img/principal/circulo2.jpeg" alt="secundaria">
-            <div class="label">Niveles</div>
-        </div>
-
-    </div>
-
-    <div class="tarjeta">
-        <div class="cardIndividual">
-            <img src="img/principal/circulo3.jpeg" alt="universitaria">
-            <div class="label">De</div>
-        </div>
-
-    </div>
-
-    <div class="tarjeta">
-        <div class="cardIndividual">
-            <img src="img/principal/circulo4.jpeg" alt="todos">
-            <div class="label">Estudio</div>
-        </div>
-
-    </div>
-
+   
+    <div class="button-container">
+        <a href="aboutUs.html" class="boton1 btn btn-primary btn-1 mt-4">SOBRE NOSOTROS</a>
+      </div>
 </main>
 
-<footer>
-    <footer-component></footer-component>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <script defer src="js/user/user-state-updater.js"></script>
 <script defer src="js/user/authen.js"></script>
-</footer>
 </body>
 
 </html>

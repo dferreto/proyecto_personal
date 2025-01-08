@@ -11,12 +11,84 @@ const txtContra = document.querySelector('#txtContra');
 const txtUrlPhoto = document.querySelector('#txtUrlPhoto');
 const txtGradoAcademico = document.querySelector('#txtGradoAcademico');
 const txtDescripcion = document.querySelector('#txtDescripcion');
+const txtVerification = document.querySelector('#txtVerification')
 
 // create local insert button
 const btnInsUser = document.querySelector('#btnInsUser');
 
+// List of allowed email domains
+const allowedDomains = [
+    'gmail.com',
+    'outlook.com',
+    'hotmail.com',
+    'live.com',
+    'yahoo.com',
+    'aol.com',
+    'zoho.com',
+    'protonmail.com',
+    'icloud.com',
+    'mail.com',
+    'gmx.com',
+    'tutanota.com',
+    'est.utn.ac.cr'
+];
+
+// Function to validate email domain
+function isValidEmailDomain(email) {
+    const domain = email.split('@')[1];
+    return allowedDomains.includes(domain);
+}
+
+function isValidPassword(password) {
+    const passwordReq = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/
+    return passwordReq.test(password)
+}
+
 // assign button listener
 btnInsUser.addEventListener('click', function () {
+    const email = txtEmail.value;
+    const password = txtContra.value;
+    const descripcion = txtDescripcion.value;
+    const passwordVerification = txtVerification.value;
+    const nombre = txtNombre.value;
+    const gradoAcademico = txtGradoAcademico.value;
+
+    if (nombre === '' || email === '' || password === '' || passwordVerification === '' || descripcion === '' || passwordVerification === '' || gradoAcademico === 'Selecciona grado académico') {
+        Swal.fire({
+            title: 'Error',
+            text: 'Todos los campos son obligatorios. Por favor, completa todos los campos.',
+            icon: 'error'
+        });
+        return;
+    }
+
+    if (!isValidEmailDomain(email)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'El dominio del correo electrónico no está permitido. Solo se permiten dominios específicos.',
+            icon: 'error'
+        });
+        return;
+    }
+
+    if (password !== passwordVerification) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Las contraseñas no coinciden. Por favor, verifica que las contraseñas son iguales.',
+            icon: 'error'
+        });
+        return;
+    }
+
+    if (!isValidPassword(password)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'La contraseña debe tener al menos 8 caracteres, incluyendo letras, números y al menos una letra mayúscula.',
+            icon: 'error'
+        });
+        return;
+    }
+
     const archivo = txtUrlPhoto.files[0];
     const nomarch = archivo.name;
     if (archivo == null) {
@@ -29,7 +101,7 @@ btnInsUser.addEventListener('click', function () {
         subir.then(snapshot => snapshot.ref.getDownloadURL())
             .then(url => {
                 // Crear usuario con email y contraseña
-                auth.createUserWithEmailAndPassword(txtEmail.value, txtContra.value)
+                auth.createUserWithEmailAndPassword(email, txtContra.value)
                     .then((userCredential) => {
                         const user = userCredential.user;
                         // Guardar datos del usuario en Firestore
@@ -42,7 +114,7 @@ btnInsUser.addEventListener('click', function () {
                             "urlPhoto": url
                         }).then(function (docRef) {
                             Swal.fire({
-                                title: '¡Registro Completo!',
+                                title: '¡Registro Exitoso!',
                                 text: 'ID del registro: ' + docRef.id,
                                 icon: 'success',
                                 confirmButtonText: 'Ok'
@@ -79,6 +151,7 @@ btnInsUser.addEventListener('click', function () {
 function limpiar() {
     txtNombre.value= '';
     txtEmail.value= '';
+    txtVerification.value= '';
     txtContra.value= '';
     txtGradoAcademico.value = '';
     txtDescripcion.value = '';

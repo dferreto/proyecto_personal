@@ -1,3 +1,11 @@
+body {
+    background-color: #0E131C;
+    background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen */
+    background-blend-mode: multiply;
+  }
+
 .icon-Image {
     height: 7rem;
 }
@@ -32,44 +40,41 @@
 }
 
 .color-button{
-    background-color: #75C7BF;
+    background: linear-gradient(to right, #007bff, #4b9cd3);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.5);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    font-weight: bold;
+
 }
 
-.color-button:hover{
-    background-color: #F2B705;
-}
+.color-button:hover, .add-investigation:focus {
+    background: linear-gradient(to right, #0069d9, #3a87c2);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .color-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 123, 255, 0.5);
+  }
 
 .color-icon{
-    background-color: #75C7BF;
+    background: linear-gradient(to right, #007bff, #4b9cd3);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.5);
+    
 }
 
 .text-color{
-    color: #75C7BF;
+    color: black;
+    
 }
 
 .text-color:hover{
-    color: #F2B705;
+    color: grey;
 }
-
-.fondo-b{
-    
-    display: flex; /* O 'grid' si prefieres usar Grid Layout */
-    flex-direction: column; /* Alinea los hijos en una columna */
-    min-height: 100vh; /* Asegura que el body sea al menos tan alto como la ventana del navegador */
-    flex-grow: 1
-}
-
-.fondo-b::before {
-    content: ''; /* Necesario para que se renderice el pseudo-elemento */
-    position: absolute; /* Posiciona absolutamente el pseudo-elemento */
-    top: 0; /* Alinea la parte superior del pseudo-elemento con la parte superior del body */
-    left: 0; /* Alinea el lado izquierdo del pseudo-elemento con el lado izquierdo del body */
-    right: 0; /* Alinea el lado derecho del pseudo-elemento con el lado derecho del body */
-    bottom: 35px;
-    background-image: url('../img/login/fondo-background.jpeg'); /* Sustituye con la ruta de tu imagen */
-    background-size: cover; /* Cubre completamente el área del pseudo-elemento */
-    background-position: center; /* Centra la imagen en el pseudo-elemento */
-    background-repeat: no-repeat; /* Asegura que la imagen no se repita */
-    filter: blur(2px); /* Aplica el efecto de desenfoque */
-    z-index: -1; /* Coloca el pseudo-elemento detrás del contenido del body */
-  }

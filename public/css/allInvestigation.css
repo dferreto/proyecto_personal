@@ -1,4 +1,12 @@
 /* Estilos personalizados para mejorar las tarjetas */
+body {
+  background: url('../img/principal/bg.jpg') rgba(0, 0, 0, 0.7);
+  background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen */
+  background-blend-mode: multiply;
+}
+
 .card {
     transition: transform 0.2s; /* Transición suave para el efecto de hover */
     cursor: pointer; /* Cambia el cursor al pasar el mouse sobre la tarjeta */
