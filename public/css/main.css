@@ -109,3 +109,31 @@ footer {
 .usuario {
     margin-right: 40px;
 }
+
+ /* Cambiar el color de la flecha en el botón de despliegue */
+#languageDropdown::after {
+    border-top-color: white !important;  /* Cambiar el color de la flecha hacia arriba */
+    margin-left: auto;
+  }
+
+  .dropdown-menu {
+    animation: slideIn 0.5s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;  /* Esto asegura que los elementos estén bien distribuidos */
+    align-items: center;
+    width: 100%;
+}

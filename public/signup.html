@@ -30,6 +30,7 @@
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v6.4.2/css/all.css"
     />
+    <link rel="shortcut icon" href="/public/img/logo/favicon.ico" />
 
     <!-- Custom style -->
     <link rel="stylesheet" href="css/main.css" />
@@ -88,7 +89,7 @@
       });
     </script>
 
-    <title>Registro nuevo usuario</title>
+    <title>Registro</title>
   </head>
 
   <body class="container-fluid fondo-b">
@@ -113,7 +114,7 @@
               alt="username-icon"
             />
           </div>
-          <input
+          <input data-translate-placeholder="full_name" 
             class="form-control"
             type="text"
             placeholder="Nombre completo"
@@ -128,7 +129,7 @@
               alt="email-icon"
             />
           </div>
-          <input
+          <input data-translate-placeholder="email" 
             class="form-control"
             type="email"
             placeholder="Correo electrónico"
@@ -145,12 +146,12 @@
             />
           </div>
           <select class="form-select" id="txtGradoAcademico">
-            <option selected class="text-muted">
+            <option data-translate="academic_degree" selected class="text-muted">
               Selecciona grado académico
             </option>
-            <option value="Diplomado">Diplomado</option>
-            <option value="Bachiller">Bachiller</option>
-            <option value="Licenciatura">Licenciatura</option>
+            <option data-translate="diploma" value="Diplomado">Diplomado</option>
+            <option data-translate="bachelor" value="Bachiller">Bachiller</option>
+            <option data-translate="bachelor_degree" value="Licenciatura">Licenciatura</option>
           </select>
         </div>
         <div class="input-group mt-2">
@@ -178,7 +179,7 @@
         alt="password-icon"
       />
     </div>
-    <input
+    <input data-translate-placeholder="password" 
       class="form-control"
       type="password"
       placeholder="Contraseña"
@@ -203,7 +204,7 @@
         alt="password-icon"
       />
     </div>
-    <input
+    <input data-translate-placeholder="repeat_password" 
       class="form-control"
       type="password"
       placeholder="Repetir contraseña"
@@ -220,19 +221,19 @@
   </div>
   
 
-        <div
+        <div data-translate="register"
           class="btn color-button text-white w-100 mt-4 fw-semibold shadow-sm"
           id="btnInsUser"
           name="btnInsUser"
         >
-          Register
+        Registrarse
         </div>
         <div class="d-flex gap-1 justify-content-center mt-1">
-          <div>Don't have an account?</div>
-          <a
+          <div data-translate="have_account">¿Tienes una cuenta?</div>
+          <a data-translate="login"
             href="login.html"
             class="text-decoration-none text-color fw-semibold"
-            >Sign in</a
+            >Iniciar sesión</a
           >
         </div>
       </div>
