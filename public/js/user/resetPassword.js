@@ -4,10 +4,10 @@ var auth = firebase.apps[0].auth();
 
 // Referencias a los elementos del formulario
 const txtEmail = document.querySelector('#txtEmail');
-const btnLogin = document.querySelector('#btnLogin');
+const btnReset = document.querySelector('#btnReset');
 
 // Evento de clic para verificar si el correo existe antes de enviar el reset
-btnLogin.addEventListener('click', function () {
+btnReset.addEventListener('click', function () {
     const email = txtEmail.value;
     if (!email) {
         Swal.fire({
@@ -35,8 +35,13 @@ btnLogin.addEventListener('click', function () {
                 .then(() => {
                     Swal.fire({
                         title: 'Correo enviado',
-                        text: 'Se ha enviado un enlace para restablecer la contraseña a su correo electrónico.',
+                        text: 'Se ha enviado un enlace para restablecer la contraseña a su correo electrónico. Recuerde verificar su correo antes de iniciar sesión.',
                         icon: 'success'
+                    }).then(() => {
+                        // Redirigir a la página de inicio de sesión después de 2 segundos
+                        setTimeout(() => {
+                            window.location.href = 'login.html'; // Redirige a login.html
+                        }, 2000);
                     });
                 })
                 .catch(error => {

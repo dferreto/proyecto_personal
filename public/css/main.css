@@ -5,6 +5,11 @@
     }
 }
 
+body {
+    color: white !important;
+}
+
+
 .signupButton {
     background-color: #6997BF;
 }

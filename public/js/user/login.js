@@ -25,6 +25,18 @@ btnLogin.addEventListener('click', function () {
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
             const user = userCredential.user;
+
+            // Verificar si el correo está verificado
+            if (!user.emailVerified) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Por favor, verifique su correo electrónico antes de iniciar sesión.',
+                    icon: 'warning'
+                });
+                auth.signOut(); // Cerrar sesión si el correo no está verificado
+                return;
+            }
+
             const dt = new Date();
 
             // Guardar o eliminar el correo según la opción "Remember Me"
