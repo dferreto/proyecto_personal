@@ -46,8 +46,60 @@ td {
   max-width: 150px; /* Poner un máximo ancho a las celdas para forzar el ajuste de texto */
 }
 
+/* Estilos para la modal */
+.modal {
+  display: none;  /* Inicialmente la modal está oculta */
+  position: fixed;
+  z-index: 1;  /* Asegura que la modal se muestre sobre otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
+  padding-top: 50px; /* Espacio desde la parte superior */
+}
 
+/* Estilos para el contenido de la modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #888;
+  width: 70%;  /* Ajuste de tamaño, más pequeño */
+  max-width: 600px; /* Ajuste de tamaño máximo */
+  position: relative;
+  max-height: 80vh; /* Ajuste de altura máxima */
+  overflow-y: auto; /* Permite el desplazamiento si las imágenes son muchas */
+  border-radius: 8px;  /* Bordes redondeados opcionales */
+}
 
+/* Estilo de las imágenes dentro de la modal */
+.modal-image-content {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+  object-fit: contain; /* Asegura que las imágenes no se corten y se ajusten dentro del contenedor */
+}
+
+/* Estilo para el botón de cierre */
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 
 
