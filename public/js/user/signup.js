@@ -32,11 +32,9 @@ function isValidEmailDomain(email) {
 }
 
 function isValidPassword(password) {
-    const passwordReq = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/
-    return passwordReq.test(password)
+    const passwordReq = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return passwordReq.test(password);
 }
-
-
 
 // assign button listener
 btnInsUser.addEventListener('click', function () {
@@ -46,7 +44,7 @@ btnInsUser.addEventListener('click', function () {
     const nombre = txtNombre.value;
     const gradoAcademico = txtGradoAcademico.value;
 
-    if (nombre === '' || email === '' || password === '' || passwordVerification === '' || passwordVerification === '' || gradoAcademico === 'Selecciona grado académico') {
+    if (nombre === '' || email === '' || password === '' || passwordVerification === '' || gradoAcademico === 'Selecciona grado académico') {
         Swal.fire({
             title: 'Error',
             text: 'Todos los campos son obligatorios. Por favor, completa todos los campos.',
@@ -97,32 +95,44 @@ btnInsUser.addEventListener('click', function () {
                 auth.createUserWithEmailAndPassword(email, txtContra.value)
                     .then((userCredential) => {
                         const user = userCredential.user;
-                        // Guardar datos del usuario en Firestore
-                        db.collection("datosUsuarios").add({
-                            "idemp": user.uid,
-                            "usuario": txtNombre.value,
-                            "email": user.email,
-                            "gradoAcademico": txtGradoAcademico.value,
-                            "urlPhoto": url
-                        }).then(function (docRef) {
-                            Swal.fire({
-                                title: '¡Registro Exitoso!',
-                                text: 'ID del registro: ' + docRef.id,
-                                icon: 'success',
-                                confirmButtonText: 'Ok'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    limpiar();
-                                    window.location.href = 'login.html';
-                                }
+
+                        // Enviar correo de verificación
+                        user.sendEmailVerification()
+                            .then(() => {
+                                // Guardar datos del usuario en Firestore
+                                db.collection("datosUsuarios").add({
+                                    "idemp": user.uid,
+                                    "usuario": txtNombre.value,
+                                    "email": user.email,
+                                    "gradoAcademico": txtGradoAcademico.value,
+                                    "urlPhoto": url
+                                }).then(function (docRef) {
+                                    Swal.fire({
+                                        title: '¡Registro Exitoso!',
+                                        text: 'ID del registro: ' + docRef.id + '. Por favor, verifica tu correo para poder iniciar sesión.',
+                                        icon: 'success',
+                                        confirmButtonText: 'Ok'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            limpiar();
+                                            window.location.href = 'login.html'; // Redirigir a la página de login
+                                        }
+                                    });
+                                }).catch(function (FirebaseError) {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'Error al guardar los datos del usuario: ' + FirebaseError,
+                                        icon: 'error'
+                                    });
+                                });
+                            })
+                            .catch((error) => {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Error al enviar el correo de verificación: ' + error.message,
+                                    icon: 'error'
+                                });
                             });
-                        }).catch(function (FirebaseError) {
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'Error al guardar los datos del usuario: ' + FirebaseError,
-                                icon: 'error'
-                            });
-                        });
                     }).catch((error) => {
                         Swal.fire({
                             title: 'Error',
@@ -138,15 +148,13 @@ btnInsUser.addEventListener('click', function () {
                 });
             });
     }
-
-
 });
 
 function limpiar() {
-    txtNombre.value= '';
-    txtEmail.value= '';
-    txtVerification.value= '';
-    txtContra.value= '';
+    txtNombre.value = '';
+    txtEmail.value = '';
+    txtVerification.value = '';
+    txtContra.value = '';
     txtGradoAcademico.value = '';
     txtUrlPhoto.value = '';
 }
