@@ -11,8 +11,6 @@ const txtConclusion = document.querySelector('#txtConclusion');
 const txtRecomendacion = document.querySelector('#txtRecomendacion');
 const btnLoad = document.querySelector('#btnLoad');
 
-           
-
 btnLoad.addEventListener('click', function() {
     let archivos = txtUrlImage.files;
     let archivoPdf = txtUrlPdf.files[0];
@@ -35,12 +33,17 @@ btnLoad.addEventListener('click', function() {
         return;
     }
 
+    // Crear una ruta personalizada con el ID del usuario y el título de la investigación
+    const rutaPersonalizada = `investigacion/${user.uid}/${txtTitulo.value}`;
+
     let imagenDeSubida = Array.from(archivos).map(archivo => {
         const nomarch = archivo.name;
         const metadata = {
             contentType: archivo.type
         };
-        return container.child('images/' + nomarch).put(archivo, metadata)
+
+        // Subir imagen a la ruta personalizada
+        return container.child(rutaPersonalizada + '/' + nomarch).put(archivo, metadata)
             .then(snapshot => snapshot.ref.getDownloadURL())
             .then(url => {
                 urlsSubidas.push(url);
@@ -53,12 +56,16 @@ btnLoad.addEventListener('click', function() {
         const metadataPdf = {
             contentType: archivoPdf.type
         };
-        pdfSubido = container.child('pdfs/' + nomarchPdf).put(archivoPdf, metadataPdf)
+
+        // Subir PDF a la ruta personalizada
+        pdfSubido = container.child(rutaPersonalizada + '/' + nomarchPdf).put(archivoPdf, metadataPdf)
             .then(snapshot => snapshot.ref.getDownloadURL());
     }
 
     Promise.all([...imagenDeSubida, pdfSubido].filter(Boolean)).then(results => {
-        const urlPdf = results[results.length - 1];
+        const urlPdf = results[results.length - 1]; // El último es el PDF
+
+        // Guardar la información en Firestore
         db.collection("datosInvestigacion").add({
             "userId": user.uid,
             "titulo": txtTitulo.value,
@@ -68,14 +75,13 @@ btnLoad.addEventListener('click', function() {
             "urlPdf": urlPdf,
             "conclusion": txtConclusion.value,
             "recomendacion": txtRecomendacion.value
-              // Añadir el UID del usuario aquí
-            }).then(function(docRef) {
-                Swal.fire({
-                    title: '¡Éxito!',
-                    text: 'ID del registro: ' + docRef.id,
-                    icon: 'success'
-                });
-                limpiar();
+        }).then(function(docRef) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'ID del registro: ' + docRef.id,
+                icon: 'success'
+            });
+            limpiar();
         }).catch(function(FirebaseError) {
             Swal.fire({
                 title: 'Error',
@@ -97,7 +103,7 @@ function limpiar() {
     txtArea.value = '';
     txtDescription.value = '';
     txtUrlImage.value = '';
-    txtUrlPdf.value = ''
+    txtUrlPdf.value = '';
     txtConclusion.value = '';
     txtRecomendacion.value = '';
 }

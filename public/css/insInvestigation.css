@@ -19,3 +19,37 @@
   input[type="button"] {
     width: auto; 
   }
+
+  body {
+    background-color: rgb(23, 20, 31) !important;
+    color: black !important;
+}
+.container-insert {
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+h4 {
+    margin-top: 50px;
+    color: white;
+}
+.form-control, .form-select {
+    border-radius: 5px;
+}
+.btn-primary {
+    background-color: #ff0000;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #911b1b;
+}
+.preview-container {
+    margin-top: 10px;
+}
+.img-preview {
+    max-width: 100px;
+    margin: 5px;
+}

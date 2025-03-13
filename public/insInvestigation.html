@@ -46,70 +46,7 @@
     <script defer src="js/user/isLogin.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        function iniImage() {
-            $('#txtUrlImage').change(function(e) {
-                addImages(e);
-            });
-        }
-        
-        function addImages(e) {
-            var files = e.target.files;
-            var imageType = /image.*/;
-            $('#imagePreviewContainer').html(''); // Limpia el contenedor
-        
-            Array.from(files).forEach(file => {
-                if (!file.type.match(imageType)) {
-                    return;
-                }
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var result = e.target.result;
-                    $('#imagePreviewContainer').append(
-                        $('<img>').attr("src", result).addClass('img-preview')
-                    );
-                }
-                reader.readAsDataURL(file);
-            });
-        }
-        
-        // Se podría agregar iniPdf aquí también si esa función aún no está definida
-        
-        $(document).ready(function() {
-            iniImage(); // Esto inicializará la función de previsualización de imágenes
-            // iniPdf(); // Inicializa la función de previsualización de PDF si la tienes
-        });
-        </script>
-
-<script>
-    function iniPdf() {
-      $('#txtUrlPdf').change(function(e) {
-        addPdf(e);
-      });
-    }
-  
-    function addPdf(e) {
-      var file = e.target.files[0];
-      var pdfType = 'application/pdf';
-  
-      if (file.type !== pdfType) {
-        alert("El archivo no es un PDF.");
-        return;
-      }
-  
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        var result = e.target.result;
-        $('#pdfSalida').attr("src", result).show(); // Muestra el elemento embed
-      }
-      reader.readAsDataURL(file);
-    }
-  
-    iniPdf();
-  </script>
-
-    <title>Mis investigaciones</title>
-</head>
+   
 
 <body class="container-fluid" onload="validar()">
 <header>
@@ -117,18 +54,16 @@
 </header>
 
 <main>
-    <h4>Agrega Investigación</h4>
+    <h4 class="text-center">Agrega Investigación</h4>
     <br>
-    <div>
-        <table class="table table-bordered">
-            <tr>
-                <td><strong>Titulo de la investigación</strong></td>
-                <td><input type="text" id="txtTitulo" size="60" maxlength="60" ></td>
-            </tr>
-
-            <tr>
-                <td><strong>Área de interés</strong></td>
-                <td>
+    <div class="container container-insert">
+        <form>
+            <div class="mb-3">
+                <label class="form-label"><strong>Título de la investigación</strong></label>
+                <input type="text" id="txtTitulo" class="form-control" maxlength="60">
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Área de interés</strong></label>
                 <select class="form-select" id="txtArea">
                     <option selected>Selecciona un área</option>
                     <option value="Ciencias Agropecuarias">Ciencias Agropecuarias</option>
@@ -136,49 +71,70 @@
                     <option value="Ingenieria">Ingeniería</option>
                     <option value="Ciencias Administrativas">Ciencias Administrativas</option>
                     <option value="Educacion">Educación</option>
-                    <option value="Artes y Humanidades">Artes y Humanidades</option>  
-                </select></td>
-            </tr>
-
-            <tr>
-                <td><strong>Descripción del tema</strong></td>
-                <td><textarea type="text" id="txtDescripcion" rows="6" cols="80" size="500" maxlength="500" ></textarea></td>
-            </tr>
-
-            <tr>
-                <td><strong>Image</strong></td>
-                <td>
-                    <input type="file" id="txtUrlImage" multiple>
-                    <div id="imagePreviewContainer"></div> <!-- Contenedor de previsualización -->
-                </td>
-            </tr>
-
-            <tr>
-                <td><strong>PDF</strong></td>
-                <td><input type="file" id="txtUrlPdf" onchange="iniPdf()"></td>
-            </tr>
-
-            <tr>
-                <td><strong>Conclusión</strong></td>
-                <td><textarea type="text" id="txtConclusion" rows="6" cols="80" size="500" maxlength="500" ></textarea></td>
-            </tr>
-            <tr>
-                <td><strong>Recomendación</strong></td>
-                <td><textarea type="text" id="txtRecomendacion" rows="6" cols="80" size="500" maxlength="500" ></textarea></td>
-            </tr>
-            
-            <tr>
-                <td colspan="2">
-                    <input type="button" id="btnLoad" value="Guardar">
-                </td>
-            </tr>
-        </table>
+                    <option value="Artes y Humanidades">Artes y Humanidades</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Descripción del tema</strong></label>
+                <textarea id="txtDescripcion" class="form-control" rows="4" maxlength="500"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Imagen</strong></label>
+                <input type="file" id="txtUrlImage" class="form-control" multiple>
+                <div id="imagePreviewContainer" class="preview-container d-flex flex-wrap"></div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>PDF</strong></label>
+                <input type="file" id="txtUrlPdf" class="form-control">
+                <embed id="pdfSalida" type="application/pdf" width="100%" height="200px" style="display:none; margin-top:10px;"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Conclusión</strong></label>
+                <textarea id="txtConclusion" class="form-control" rows="4" maxlength="500"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Recomendación</strong></label>
+                <textarea id="txtRecomendacion" class="form-control" rows="4" maxlength="500"></textarea>
+            </div>
+            <div class="text-center">
+                <button type="button" id="btnLoad" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
     </div>
-
 </main>
+<script defer src="js/investigation/adInvestigation.js"></script>
+<script defer src="js/user/authen.js"></script>
+<script defer src="js/user/user-state-updater.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#txtUrlImage').change(function(e) {
+            var files = e.target.files;
+            $('#imagePreviewContainer').html('');
+            Array.from(files).forEach(file => {
+                if (!file.type.match(/image.*/)) return;
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreviewContainer').append($('<img>').attr("src", e.target.result).addClass('img-preview'));
+                }
+                reader.readAsDataURL(file);
+            });
+        });
+        $('#txtUrlPdf').change(function(e) {
+            var file = e.target.files[0];
+            if (file.type !== 'application/pdf') {
+                alert("El archivo no es un PDF.");
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#pdfSalida').attr("src", e.target.result).show();
+            }
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
 
 <footer>
-    <footer-component></footer-component>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
