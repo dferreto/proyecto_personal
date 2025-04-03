@@ -114,8 +114,7 @@ btnInsUser.addEventListener('click', function () {
                                         confirmButtonText: 'Ok'
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            limpiar();
-                                            window.location.href = 'login.html'; // Redirigir a la página de login
+                                            limpiar();  
                                         }
                                     });
                                 }).catch(function (FirebaseError) {

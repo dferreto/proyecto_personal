@@ -55,8 +55,15 @@ btnLogin.addEventListener('click', function () {
                         doc.ref.update({
                             ultAcceso: dt
                         }).then(function () {
-                            // Redirigir a 'index.html' después de guardar los datos
-                            document.location.href = 'index.html';
+                            Swal.fire({
+                                title: '¡Inicio de sesión exitoso!',
+                                text: 'Bienvenido',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            }).then(() => {
+                                // Redirigir a 'index.html' después de que el usuario haga clic en OK
+                                document.location.href = 'index.html';
+                            });
                         });
                     });
                 })

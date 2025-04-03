@@ -7,7 +7,7 @@ class Menu extends HTMLElement {
         <div class="container">
           <!-- Logo -->
           <a class="navbar-brand fs-4" href="index.html">
-            <img src="img/logo/logo.png" alt="" width="70px" height="70px" class="d-inline-block align-text-top logo">
+            <img src="img/logo/logo.png" alt="" width="100px" height="100px" class="d-inline-block align-text-top logo">
           </a>
           <!-- Toggle Btn -->
           <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -30,15 +30,22 @@ class Menu extends HTMLElement {
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="menu_investigaciones">Investigaciones</a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="allInvestigation.html" id="menu_consultar_investigaciones">Consultar investigaciones</a></li>
-                    <li><a class="dropdown-item" href="investigation.html" id="menu_subir_investigaciones">Subir investigaciones</a></li>
+                    <li><a class="dropdown-item" href="investigation.html" id="menu_subir_investigaciones">Mis investigaciones</a></li>
                   </ul>
                 </li>
               </ul>
               <!-- Login / Sign up -->
-              <div id="authButtons" class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                <a href="login.html" class="text-white text-decoration-none" id="login">Iniciar sesión</a>
-                <a href="signup.html" class="text-white text-decoration-none p-3 py-1 rounded-4 signupButton" id="signup">Registrarse</a>
-              </div>
+        <div id="authButtons" class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
+  <!-- Botón Iniciar Sesión -->
+  <a href="login.html" 
+     class="btn btn-outline-light rounded-pill px-4 py-2 shadow-sm transition-all hover:shadow-lg hover:bg-white hover:text-dark border-2 border-white text-decoration-none" 
+     id="login">Iniciar sesión</a>
+  
+  <!-- Botón Registrarse (contraste) -->
+  <a href="signup.html" 
+     class="custom-signup-button text-decoration-none" 
+     id="signup">Registrarse</a>
+</div>
 
               <!-- User Profile Photo and Dropdown -->
               <div class="nav-item dropdown" id="userDropdown" style="display: none; margin-right: 30px;">

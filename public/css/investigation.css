@@ -1,89 +1,283 @@
+
+/* Estilo del cuerpo */
 body {
-  background: url('../img/principal/bg.jpg') rgba(0, 0, 0, 0.7);
-  background-size: cover; /* Ajusta la imagen para que cubra todo el fondo */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  background-position: center; /* Centra la imagen */
-  background-blend-mode: multiply;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  flex-direction: column; /* Alinea los elementos verticalmente */
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden; /* Evita desbordamientos */
+  overflow-y: auto; /* Permite scroll vertical */
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
 }
 
-.add-investigation {
-    background: linear-gradient(to right, #007bff, #4b9cd3);
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.5);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+/* Importar fuente */
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+/* Restablecer estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Sección de ondas */
+section {
+  position: fixed; /* Fija la sección en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1; /* Asegura que las ondas estén detrás del contenido */
+  pointer-events: none; /* Evita que las ondas interfieran con clics u otros eventos */
+}
+
+section .wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4973ff;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+
+section .wave span {
+  content: "";
+  position: absolute;
+  width: 365vh;
+  height: 365vh;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  background: #000;
+}
+
+
+section .wave span:nth-child(1) {
+  border-radius: 45%;
+  background: rgba(20, 20, 20, 0.8); /* Menor opacidad */
+  animation: animate 50s linear infinite; /* Velocidad más lenta */
+}
+
+section .wave span:nth-child(2) {
+  border-radius: 40%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 50s linear infinite;
+}
+
+section .wave span:nth-child(3) {
+  border-radius: 42.5%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 50s linear infinite;
+}
+
+/* Animación de las ondas */
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
+
+
+/* Contenedor de la tabla para evitar desbordamientos */
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* Ya no es necesario en la consulta de medios */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos responsivos para tablas en pantallas pequeñas */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  
+
+ /* Contenedor de la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 70vh; /* Establece una altura máxima y permite el desplazamiento vertical */
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de la tabla */
+.table {
+  width: 100%;
+  table-layout: fixed;
+  background-color: #1a1a2e; /* Fondo oscuro para la tabla */
+  color: white; /* Texto en color blanco */
+  border-collapse: collapse;
+}
+
+/* Estilo para las celdas */
+.table th, .table td {
+  border: 1px solid #2e2e4f; /* Bordes oscuros */
+  padding: 12px;
+  text-align: center;
+}
+
+/* Encabezados de la tabla */
+.table thead {
+  background-color: #0f3460; /* Azul oscuro */
+}
+
+/* Filas impares para mejor visibilidad */
+.table tbody tr:nth-child(odd) {
+  background-color: #16213e; /* Azul oscuro */
+}
+
+/* Filas al pasar el cursor */
+.table tbody tr:hover {
+  background-color: #1b3a69;
+}
+
+/* Estilo para las filas de la tabla en pantallas pequeñas */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table thead {
+    display: none; /* Oculta los encabezados en pantallas pequeñas */
+  }
+
+  .table tbody tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .table tbody tr td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
+
+  .table tbody tr td::before {
+    content: attr(data-label);
     font-weight: bold;
     text-transform: uppercase;
   }
-  
-  .add-investigation:hover, .add-investigation:focus {
-    background: linear-gradient(to right, #0069d9, #3a87c2);
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.5);
-    transform: translateY(-2px);
-  }
-  
-  .add-investigation:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 3px rgba(0, 123, 255, 0.5);
+
+  .table tbody tr td button {
+    font-size: 0.8rem;
   }
 
-  .categoria-imagen {
-    width: 100px; /* Ancho fijo para todas las imágenes */
-    height: 100px; /* Altura fija para todas las imágenes */
-    object-fit: cover; /* Esto asegura que la imagen se recorte para ajustarse al tamaño, sin distorsionar */
-    border-radius: 5px; /* Opcional: bordes redondeados */
-    margin: 5px; /* Añade un margen alrededor de cada imagen */
-    display: inline-block;
+  .visibility-checkbox {
+    width: 24px; /* Aumentar tamaño en móviles */
+    height: 24px;
+  }
 }
 
+/* Botón de agregar investigación */
+.add-investigation {
+  background: linear-gradient(to right, #007bff, #4b9cd3);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.5);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.add-investigation:hover,
+.add-investigation:focus {
+  background: linear-gradient(to right, #0069d9, #3a87c2);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3); /* Sombra más suave */
+  transform: translateY(-2px);
+}
+
+.add-investigation:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0, 123, 255, 0.5);
+}
+
+/* Imágenes dentro de la tabla */
+.categoria-imagen {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Asegura que la imagen se recorte sin distorsionar */
+  border-radius: 5px;
+  margin: 5px;
+  display: inline-block;
+}
+
+/* Ajustes para las celdas de la tabla */
 td {
-  text-align: center; /* Centrar texto horizontalmente */
-  vertical-align: middle; /* Centrar texto verticalmente */
-  padding: 10px; /* Añadir algo de espacio alrededor del contenido dentro de las celdas */
-  word-wrap: break-word; /* Asegurarse de que el texto no desborde la celda */
-  max-width: 150px; /* Poner un máximo ancho a las celdas para forzar el ajuste de texto */
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px; /* Un poco más de espacio */
+  font-size: 0.9rem; /* Aumentar ligeramente el tamaño de la fuente */
 }
 
-/* Estilos para la modal */
+/* Evitar que el texto desborde en columnas específicas */
+td.descripcion, td.conclusion, td.recomendacion {
+  word-wrap: break-word;
+  max-width: 150px;
+  white-space: normal;
+}
+
+/* Estilos de la modal */
 .modal {
-  display: none;  /* Inicialmente la modal está oculta */
+  display: none;
   position: fixed;
-  z-index: 1;  /* Asegura que la modal se muestre sobre otros elementos */
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro */
-  padding-top: 50px; /* Espacio desde la parte superior */
+  background-color: rgba(0, 0, 0, 0.7);
+  padding-top: 50px;
 }
 
-/* Estilos para el contenido de la modal */
+/* Contenido de la modal */
 .modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 10px;
   border: 1px solid #888;
-  width: 70%;  /* Ajuste de tamaño, más pequeño */
-  max-width: 600px; /* Ajuste de tamaño máximo */
+  width: 70%;
+  max-width: 600px;
   position: relative;
-  max-height: 80vh; /* Ajuste de altura máxima */
-  overflow-y: auto; /* Permite el desplazamiento si las imágenes son muchas */
-  border-radius: 8px;  /* Bordes redondeados opcionales */
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 8px;
 }
 
-/* Estilo de las imágenes dentro de la modal */
+/* Imágenes dentro de la modal */
 .modal-image-content {
   width: 100%;
   height: auto;
   display: block;
   margin-bottom: 10px;
-  object-fit: contain; /* Asegura que las imágenes no se corten y se ajusten dentro del contenedor */
+  object-fit: contain;
 }
 
-/* Estilo para el botón de cierre */
+/* Botón de cierre de la modal */
 .close {
   color: #aaa;
   font-size: 28px;
@@ -98,10 +292,47 @@ td {
 .close:focus {
   color: black;
   text-decoration: none;
-  cursor: pointer;
 }
 
+/* Sombra y bordes en imágenes dentro de la modal */
+.modal-image-content {
+  max-width: 100%;
+  height: auto;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
 
+/* Estilo del contenedor */
+.visibility-label {
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
 
+/* Estilo por defecto (ojo abierto) */
+.visibility-label .fa-eye {
+  color: #007bff;
+}
 
-  
+.visibility-label .fa-eye-slash {
+  color: #dc3545;
+  display: none; /* Inicialmente el ojo tachado no se muestra */
+}
+
+/* Cuando el estado de visibilidad es privado, mostramos el ojo tachado */
+.visibility-label.private .fa-eye {
+  display: none; /* Ocultamos el ojo abierto */
+}
+
+.visibility-label.private .fa-eye-slash {
+  display: inline; /* Mostramos el ojo tachado */
+}
+
+/* Asegurar enfoque visible en el botón de cierre */
+.close:focus {
+  outline: 2px solid #007bff; /* Añadir contorno visible cuando esté enfocado */
+  color: #0056b3;
+}
