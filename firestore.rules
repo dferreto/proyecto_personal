@@ -12,8 +12,8 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-   match /{datosInvestigacion}/{document=**} {
-    allow read: if true;
+  match /{datosInvestigacion}/{document=**} {
+    allow read: if resource.data.privado !=true || request.auth != null && request.auth.uid == resource.data.userId;
     allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     allow create: if request.auth != null && request.resource.data.userId == request.auth.uid &&
                     request.resource.data.titulo is string &&
@@ -25,7 +25,8 @@ service cloud.firestore {
                     request.resource.data.urlImages.size() <= 6 &&
                     request.resource.data.conclusion is string &&
                     request.resource.data.recomendacion is string;
-  }
+}
+
 
   match /{comentarios}/{document=**} {
     allow read: if true;

@@ -21,7 +21,7 @@
 
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
-    <link rel="shortcut icon" href="/public/img/logo/favicon.ico" />
+    <link rel="shortcut icon" type="image/png" href="img/logo/logo.png"/>
     
     <!-- Custom style -->
     <link rel="stylesheet" href="css/main.css">
@@ -45,58 +45,58 @@
 
 
 <body class="container-fluid fondo-b">
+
+    <div class="ripple-background">
+        <div class="circle xxlarge shade1"></div>
+        <div class="circle xlarge shade2"></div>
+        <div class="circle large shade3"></div>
+        <div class="circle medium shade4"></div>
+        <div class="circle small shade5"></div>
+    </div>
     <header>
         <menu-component></menu-component>
     </header>
 
-<main class="d-flex justify-content-center align-items-center vh-100">
-    <div class="bg-light p-5 rounded-5 text-secondary size-Card border bg-">
-        <div class="d-flex justify-content-center">
-            <img class="icon-Image bg" src="img/login/login-icon.svg" alt="login-icon">
-        </div>
-        <div class="input-group mt-4">
-            <div class="input-group-text color-icon ">
-                <img class="icon-Input" src="img/login/email-icon.svg" alt="username-icon">
+    <main class="d-flex justify-content-center align-items-start vh-100 pt-5">
+        <div class="bg-light p-5 rounded-5 text-secondary size-Card border">
+            <div class="d-flex justify-content-center">
+                <img class="icon-Image" src="img/login/login-icon.svg" alt="login-icon">
             </div>
-            <input class="form-control" type="email" placeholder="Correo electrónico" id="txtEmail" required autofocus>
-
-
-        </div>
-        <div class="input-group mt-2">
-            <div class="input-group-text color-icon">
-                <img class="icon-Input" src="img/login/password-icon.svg" alt="password-icon">
+            <div class="input-group mt-4">
+                <div class="input-group-text color-icon">
+                    <img class="icon-Input" src="img/login/email-icon.svg" alt="username-icon">
+                </div>
+                <input class="form-control" type="email" placeholder="Correo electrónico" id="txtEmail" required autofocus>
             </div>
-            <input class="form-control" type="password" placeholder="Contraseña" id="txtContra" required>
-            <button
-                type="button"
-                class="btn btn-outline-secondary toggle-password"
-                data-target="txtContra"
-            >
-                <i class="fa fa-eye"></i> <!-- Icono de ojo -->
-            </button>
-        </div>
-        
-        
-        
-        <div class="d-flex justify-content-around mt-1">
-            <div class="d-flex align-items-center gap-1">
-                <input class="form-check-input" type="checkbox" id="rememberMe"> 
-                <div class="remember pt-1">Recuérdame</div>
+            <div class="input-group mt-2">
+                <div class="input-group-text color-icon">
+                    <img class="icon-Input" src="img/login/password-icon.svg" alt="password-icon">
+                </div>
+                <input class="form-control" type="password" placeholder="Contraseña" id="txtContra" required>
+                <button type="button" class="btn btn-outline-secondary toggle-password" data-target="txtContra">
+                    <i class="fa fa-eye"></i> <!-- Icono de ojo -->
+                </button>
             </div>
-            <div class="pt-1">
-                <a href="resetPassword.html" class="text-decoration-none text-color fw-semibold fst-italic forgot-Password">¿Olvidaste tu contraseña?</a>
+            
+            <div class="d-flex justify-content-between mt-2 flex-column flex-sm-row">
+                <div class="d-flex align-items-center gap-1">
+                    <input class="form-check-input" type="checkbox" id="rememberMe"> 
+                    <label for="rememberMe" class="remember pt-1">Recuérdame</label>
+                </div>
+                <div class="pt-1 mt-2 mt-sm-0">
+                    <a href="resetPassword.html" class="text-decoration-none text-color fw-semibold fst-italic forgot-Password">¿Olvidaste tu contraseña?</a>
+                </div>
+            </div>
+    
+            <button class="btn color-button text-white w-100 mt-4 fw-semibold shadow-sm" id="btnLogin">Iniciar sesión</button>
+    
+            <div class="d-flex gap-1 justify-content-center mt-1">
+                <div>¿No tienes una cuenta?</div>
+                <a href="signup.html" class="text-decoration-none text-color fw-semibold">Registrarse</a>
             </div>
         </div>
-        <button class="btn color-button text-white w-100 mt-4 fw-semibold shadow-sm" id="btnLogin">Iniciar sesión</button>
-        <div class="d-flex gap-1 justify-content-center mt-1">
-            <div>¿No tienes una cuenta?</div>
-            <a href="signup.html" class="text-decoration-none text-color fw-semibold">Registrarse</a>
-        </div>
-
-       
-        
-    </div>
-</main>
+    </main>
+    
 
 
 

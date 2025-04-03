@@ -1,9 +1,21 @@
-@media (max-width: 991px) {
+@media (max-width: 991px) { /* Para móviles */
     .sidebar {
         background-color: rgba(255, 255, 255, 0.15);
         backdrop-filter: blur(10px);
     }
-}
+    #userDropdown {
+      order: -1; /* Mueve el perfil al inicio en el offcanvas */
+      justify-content: start;
+      margin-bottom: 15px;
+    }
+  }
+  
+  @media (min-width: 992px) { /* Para escritorio */
+    #userDropdown {
+      margin-left: auto; /* Mueve el perfil a la derecha */
+    }
+  }
+  
 
 body {
     color: white !important;
@@ -142,3 +154,52 @@ footer {
     align-items: center;
     width: 100%;
 }
+
+/* Botón Iniciar Sesión */
+#login {
+    color: #fff; /* Texto blanco */
+    background-color: transparent; /* Fondo transparente */
+    border: 2px solid #fff; /* Borde blanco */
+    padding: 0.75rem 1.5rem; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    font-weight: 600; /* Negrita */
+    border-radius: 2rem; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+  }
+  
+  /* Efecto hover para Iniciar Sesión */
+  #login:hover {
+    background-color: #fff; /* Fondo blanco */
+    color: #000; /* Texto negro */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Aumenta la sombra */
+    transform: translateY(-2px); /* Levanta ligeramente el botón */
+  }
+
+/* Botón Registrarse */
+.custom-signup-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    font-weight: 600; /* Negrita */
+    color: #fff; /* Texto blanco */
+    background-color: #1461af; /* Azul vibrante pero no demasiado saturado */
+    border: none; /* Sin borde */
+    border-radius: 2rem; /* Bordes completamente redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: all 0.3s ease-in-out; /* Transición suave */
+    text-decoration: none; /* Elimina subrayado */
+  }
+  
+  /* Efecto hover para Registrarse */
+  .custom-signup-button:hover {
+    background-color: #0e79e4; /* Azul más oscuro en hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Aumenta la sombra */
+    transform: translateY(-2px); /* Levanta ligeramente el botón */
+  }
+  
+  /* Estado activo para Registrarse */
+  .custom-signup-button:active {
+    transform: translateY(0); /* Regresa a la posición original */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Reduce la sombra */
+  }

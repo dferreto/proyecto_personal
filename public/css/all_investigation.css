@@ -1,0 +1,226 @@
+/* Estilo del cuerpo */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  flex-direction: column; /* Alinea los elementos verticalmente */
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+}
+
+/* Contenedor principal */
+main {
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  margin-top: 20px;
+  overflow-y: auto; /* Permitir el desplazamiento en caso de contenido largo */
+}
+
+/* Importar fuente */
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+/* Restablecer estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Sección de ondas */
+.section1 {
+  position: fixed; /* Fija la sección en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1; /* Asegura que las ondas estén detrás del contenido */
+  pointer-events: none; /* Evita que las ondas interfieran con clics u otros eventos */
+}
+
+section .wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4973ff;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+
+section .wave span {
+  content: "";
+  position: absolute;
+  width: 365vh;
+  height: 365vh;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  background: #000;
+}
+
+section .wave span:nth-child(1) {
+  border-radius: 45%;
+  background: rgba(20, 20, 20, 0.8); /* Menor opacidad */
+  animation: animate 50s linear infinite; /* Velocidad más lenta */
+}
+
+section .wave span:nth-child(2) {
+  border-radius: 40%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 50s linear infinite;
+}
+
+section .wave span:nth-child(3) {
+  border-radius: 42.5%;
+  background: rgba(20, 20, 20, 0.5);
+  animation: animate 50s linear infinite;
+}
+
+/* Animación de las ondas */
+@keyframes animate {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
+
+/* Contenedor principal */
+main {
+  position: relative;
+  z-index: 1; /* Asegura que el contenido esté por encima de las ondas */
+  background: rgba(0, 0, 0, 0.7); /* Fondo semitransparente para mejorar la legibilidad */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para destacar el contenido */
+  padding: 20px; /* Espaciado interno */
+  margin-top: 20px; /* Espacio superior para separar del encabezado */
+  max-height: 80vh; /* Altura máxima para permitir el scroll */
+  overflow-y: auto; /* Habilita el scroll vertical */
+}
+
+/* Scrollbar personalizado (opcional) */
+main::-webkit-scrollbar {
+  width: 8px;
+}
+
+main::-webkit-scrollbar-thumb {
+  background-color: #4973ff;
+  border-radius: 10px;
+}
+
+main::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo general de las tarjetas */
+.card {
+  border: none; /* Elimina el borde predeterminado */
+  border-radius: 10px; /* Bordes redondeados */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Efecto de transición */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente */
+  color: #333; /* Texto oscuro para mejor contraste */
+  max-width: 300px; /* Ancho máximo reducido */
+  margin: 10px auto; /* Centrado con margen */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Eleva la tarjeta al pasar el mouse */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+}
+
+/* Encabezado de la tarjeta */
+.card-header-custom {
+  background: linear-gradient(to right, #4973ff, #6c5ce7); /* Degradado azul */
+  color: white; /* Texto blanco */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px; /* Reducción del padding */
+  font-size: 1rem; /* Tamaño de fuente más pequeño */
+  text-align: center;
+}
+
+/* Cuerpo de la tarjeta */
+.card-body-custom {
+  padding: 15px; /* Padding reducido */
+  font-size: 0.85rem; /* Tamaño de fuente más pequeño */
+}
+
+/* Subtítulos con iconos */
+.card-subtitle {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px; /* Espaciado reducido */
+}
+
+/* Iconos */
+.fa-graduation-cap,
+.fa-book {
+  color: #4973ff; /* Color azul para los iconos */
+  font-size: 1rem; /* Tamaño de ícono reducido */
+}
+
+/* Párrafo de descripción */
+.card-text {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.5; /* Espaciado entre líneas reducido */
+  height: 45px; /* Altura fija reducida */
+  overflow: hidden; /* Oculta el texto que excede la altura */
+  text-overflow: ellipsis; /* Añade puntos suspensivos si el texto se trunca */
+}
+
+/* Enlaces dentro de las tarjetas */
+.card-title a {
+  color: white; /* Texto blanco en el encabezado */
+  text-decoration: none; /* Sin subrayado */
+  font-weight: bold;
+}
+
+.card-title a:hover {
+  text-decoration: underline; /* Subraya el título al pasar el mouse */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  main {
+    padding: 10px; /* Reducir el espaciado en pantallas pequeñas */
+    max-height: 85vh; /* Altura máxima ligeramente mayor */
+  }
+
+  .card {
+    max-width: 100%; /* Ocupa todo el ancho en dispositivos móviles */
+    margin: 10px auto; /* Centrado con margen */
+  }
+
+  .col-md-9, .col-md-3 {
+    flex: 0 0 100%; /* Una columna por fila en pantallas pequeñas */
+    max-width: 100%;
+  }
+}
+
+/* Contenedor principal */
+main {
+  flex: 1; /* Permite que el main ocupe el espacio disponible */
+}
+
+/* Footer */
+footer {
+  background: #1a233a; /* Color oscuro para el footer */
+  color: white;
+  padding: 15px 0; /* Espaciado interno */
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Línea superior decorativa */
+}

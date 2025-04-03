@@ -25,7 +25,7 @@ btnLoad.addEventListener('click', function() {
     if (!archivoPdf) {
         alert('Debe seleccionar un archivo PDF.');
         return;
-    } else if (archivos.length < 4) {
+    } else if (archivos.length < 1) {
         alert('Debe seleccionar al menos cuatro imágenes.');
         return;
     } else if (archivos.length > 6) {
@@ -74,13 +74,15 @@ btnLoad.addEventListener('click', function() {
             "urlImages": urlsSubidas,
             "urlPdf": urlPdf,
             "conclusion": txtConclusion.value,
-            "recomendacion": txtRecomendacion.value
+            "recomendacion": txtRecomendacion.value,
+            "visible": true  // Investigación pública por defecto
         }).then(function(docRef) {
             Swal.fire({
                 title: '¡Éxito!',
                 text: 'ID del registro: ' + docRef.id,
                 icon: 'success'
             });
+            document.location.href = 'investigation.html';
             limpiar();
         }).catch(function(FirebaseError) {
             Swal.fire({
