@@ -19,11 +19,10 @@ service cloud.firestore {
                     request.resource.data.titulo is string &&
                     request.resource.data.area is string &&
                     request.resource.data.descripcion is string &&
-                    request.resource.data.urlPdf is string &&
+                    request.resource.data.urlArchivo is string &&
                     request.resource.data.urlImages is list &&
                     request.resource.data.urlImages.size() > 0 && 
                     request.resource.data.urlImages.size() <= 6 &&
-                    request.resource.data.conclusion is string &&
                     request.resource.data.recomendacion is string;
 }
 

@@ -1,13 +1,10 @@
-// Referencia a Firestore
 var db = firebase.apps[0].firestore();
 const tabla = document.querySelector("#tablaCateg");
 let user = firebase.auth().currentUser;
-
 let esPrimerCarga = true;
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-    // Usuario está autenticado, ejecutar la consulta
     cargarCategorias(user);
     esPrimerCarga = false;
   } else {
@@ -19,119 +16,54 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 
-// Función para cargar las categorías e investigaciones
 function cargarCategorias(user) {
   db.collection("datosInvestigacion")
-    .where("userId", "==", user.uid)
     .get()
-    .then((querySnapshot) => {
-      // Limpiar contenido anterior
-      tabla.innerHTML = "";
+    .then(function (query) {
+      tabla.innerHTML = ""; // Limpiar el contenedor
+      query.forEach(function (doc) {
+        const isVisible = doc.data().visible; // Estado de visibilidad
+        const cardClass = ''; // No ocultar cards aquí
 
-      // Nueva tabla con diseño mejorado
-      const tableHTML = `
-        <div class="table-responsive table-container">
-          <table class="table table-hover table-bordered shadow-sm">
-            <thead class="table-dark text-center">
-              <tr>
-                <th>Título</th>
-                <th>Área</th>
-                <th>Descripción</th>
-                <th>Imágenes</th>
-                <th>PDF</th>
-                <th>Conclusión</th>
-                <th>Recomendación</th>
-                <th>Visibilidad</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
-      `;
-      tabla.innerHTML = tableHTML;
+        const truncateText = (text, maxLength) => {
+          if (!text) return 'No disponible';
+          return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+        };
+        const descripcionResumida = truncateText(doc.data().descripcion, 50);
+        const recomendacionResumida = truncateText(doc.data().recomendacion, 50);
 
-      // Obtener el cuerpo de la tabla
-      const tbody = document.querySelector('#tablaCateg tbody');
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const isPrivate = data.visible; // Si visible es true, la investigación es privada
-        const rowClass = isPrivate ? 'hidden' : ''; // Clase para ocultar la fila si está privada
-
-        const row = `
-          <tr id="row-${doc.id}" class="${rowClass}">
-            <td data-label="Título">${data.titulo}</td>
-            <td data-label="Área">${data.area}</td>
-            <td data-label="Descripción">${data.descripcion}</td>
-            <td data-label="Imágenes">
-              ${
-                data.urlImages
-                  ? `<button class="btn btn-warning view-images-btn" data-doc-id="${doc.id}"> <i class="fas fa-images"></i></button>`
-                  : 'No disponible'
-              }
-            </td>
-            <td data-label="PDF">
-              ${
-                data.urlPdf && data.urlPdf.trim() !== ""
-                  ? `<a href="${data.urlPdf}" target="_blank"><button class="btn btn-warning">Ver PDF</button></a>`
-                  : 'No disponible'
-              }
-            </td>
-            <td data-label="Conclusión">${data.conclusion}</td>
-            <td data-label="Recomendación">${data.recomendacion}</td>
-            <td data-label="Estado">
-              <label class="visibility-label ${isPrivate ? 'private' : ''}" data-doc-id="${doc.id}">
-                <i class="fas fa-eye ${isPrivate ? 'hidden' : ''}"></i>
-                <i class="fas fa-eye-slash ${isPrivate ? '' : 'hidden'}"></i>
+        const card = `
+        <div class="card ${cardClass}" id="card-${doc.id}">
+          <div class="card-body">
+            <h5 class="card-title">${doc.data().titulo}</h5>
+            <p class="card-text"><strong>Área:</strong> ${doc.data().area}</p>
+            <p class="card-text"><strong>Descripción:</strong> ${descripcionResumida}</p>
+            <p class="card-text"><strong>Imágenes:</strong> 
+              ${doc.data().urlImages ? `<button class="btn btn-success btn-sm view-images-btn" onclick="openImageModal('${doc.id}')"><i class="fas fa-images"></i></button>` : 'No disponible'}
+            </p>
+            <p class="card-text"><strong>Documento:</strong> 
+              ${doc.data().urlArchivo && doc.data().urlArchivo.trim() !== "" 
+                ? `<a href="${doc.data().urlArchivo}" download><button class="btn btn-success btn-sm"><i class="fas fa-download"></i> Obtener</button></a>`
+                : 'No disponible'}
+            </p>
+            <p class="card-text"><strong>Recomendación:</strong> ${recomendacionResumida}</p>
+            <p class="card-text"><strong>Visibilidad:</strong> 
+              <label class="visibility-label ${isVisible ? 'private' : ''}" onclick="toggleVisibility(event, '${doc.id}')">
+                <i class="fas fa-eye ${isVisible ? 'hidden' : ''}" style="color: blue;"></i>
+                <i class="fas fa-eye-slash ${isVisible ? '' : 'hidden'}" style="color: red;"></i>
               </label>
-            </td>
-            <td data-label="Acciones">
-              <button class="btn btn-outline-success edit-btn" data-doc-id="${doc.id}">Editar</button>
-              <button class="btn btn-outline-danger delete-btn" data-doc-id="${doc.id}">Borrar</button>
-            </td>
-          </tr>
-        `;
-        tbody.innerHTML += row;
+            </p>
+            <div class="d-flex justify-content-center gap-2">
+              <button class="btn-primary" data-id="${doc.id}" onclick="showInvestigation(this)">Mostrar</button>
+              <button class="btn btn-outline-success btn-sm" onclick="openEditModal('${doc.id}')">Editar</button>
+              <button class="btn btn-outline-danger btn-sm" onclick="deleteInvestigacion('${doc.id}')">Borrar</button>
+            </div>
+          </div>
+        </div>
+    `;
+        tabla.innerHTML += card;
       });
-
-      // Delegación de eventos para botones dinámicos
-      tbody.addEventListener('click', handleTableActions);
-    })
-    .catch((error) => {
-      console.error("Error al cargar las categorías: ", error);
     });
-}
-
-// Manejador de acciones en la tabla
-function handleTableActions(event) {
-  const target = event.target;
-
-  // Abrir modal de imágenes
-  if (target.classList.contains('view-images-btn')) {
-    const docId = target.dataset.docId;
-    openImageModal(docId);
-  }
-
-  // Cambiar visibilidad
-  if (target.closest('.visibility-label')) {
-    const label = target.closest('.visibility-label');
-    const docId = label.dataset.docId;
-    toggleVisibility(label, docId);
-  }
-
-  // Eliminar investigación
-  if (target.classList.contains('delete-btn')) {
-    const docId = target.dataset.docId;
-    deleteInvestigacion(docId);
-  }
-
-  // Editar investigación (puedes implementar esta función según tus necesidades)
-  if (target.classList.contains('edit-btn')) {
-    const docId = target.dataset.docId;
-    console.log(`Editar investigación con ID: ${docId}`);
-  }
 }
 
 // Función para abrir el modal de imágenes
@@ -141,26 +73,25 @@ function openImageModal(docId) {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        const images = doc.data().urlImages || [];
-
+        const data = doc.data();
+        const images = data.urlImages || [];
         if (images.length === 0) {
           alert("No hay imágenes disponibles.");
           return;
         }
 
-        // Generar carrusel de imágenes
+        // Creación de los elementos del carrusel
         const carouselItems = images
           .map(
-            (url, index) => `
+            (url, index) => `  
               <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img src="${url}" class="d-block w-100 modal-image-content">
-              </div>
-            `
+                <img src="${url}" class="d-block w-100 modal-image-content" alt="Imagen de investigación">
+              </div>`
           )
           .join("");
 
-        // Inyectar HTML en el modal
-        document.getElementById("modalContent").innerHTML = `
+        // Contenido del modal con el carrusel
+        document.getElementById("modalContent").innerHTML = ` 
           <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">${carouselItems}</div>
             <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
@@ -169,11 +100,11 @@ function openImageModal(docId) {
             <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </a>
-          </div>
-        `;
-
-        // Mostrar modal
-        document.getElementById("modal").style.display = "flex";
+          </div>`;
+        
+        // Abrir el modal utilizando Bootstrap
+        const modalElement = new bootstrap.Modal(document.getElementById('modal'));
+        modalElement.show();
       }
     })
     .catch((error) => {
@@ -181,20 +112,8 @@ function openImageModal(docId) {
     });
 }
 
-// Función para cerrar el modal
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
 
-// Cerrar el modal si se hace clic fuera de la imagen
-window.onclick = function (event) {
-  const modal = document.getElementById("modal");
-  if (event.target === modal) {
-    closeModal();
-  }
-};
 
-// Función para eliminar una investigación
 function deleteInvestigacion(docId) {
   Swal.fire({
     title: "¿Estás seguro?",
@@ -212,7 +131,7 @@ function deleteInvestigacion(docId) {
         .delete()
         .then(() => {
           Swal.fire("Eliminado", "La investigación ha sido eliminada.", "success");
-          document.getElementById(`row-${docId}`).remove(); // Eliminar la fila directamente
+          cargarCategorias(firebase.auth().currentUser);
         })
         .catch((error) => {
           Swal.fire("Error", "No se pudo eliminar.", "error");
@@ -221,22 +140,183 @@ function deleteInvestigacion(docId) {
   });
 }
 
-// Función para cambiar la visibilidad
-function toggleVisibility(label, docId) {
-  const isCurrentlyVisible = label.classList.contains('private'); // Si tiene la clase 'private', está privado
-  const newVisibility = !isCurrentlyVisible; // Cambiar el estado
+function toggleVisibility(event, docId) {
+  const label = event.target.closest('.visibility-label'); // Contenedor del ícono
+  const isCurrentlyVisible = label.classList.contains('private'); // Estado actual (invertido)
+  const newVisibility = !isCurrentlyVisible; // Invertir el estado
 
-  // Actualizar la base de datos
+  // Alternar la clase 'private' para cambiar el ícono
+  label.classList.toggle('private');
+
+  // Actualizar los íconos directamente en el DOM
+  const eyeIcon = label.querySelector('.fa-eye');
+  const eyeSlashIcon = label.querySelector('.fa-eye-slash');
+  if (eyeIcon && eyeSlashIcon) {
+    eyeIcon.classList.toggle('hidden', newVisibility); // Mostrar/ocultar fa-eye
+    eyeSlashIcon.classList.toggle('hidden', !newVisibility); // Mostrar/ocultar fa-eye-slash
+  }
+
+  // Actualizar el estado de visibilidad en Firestore
   db.collection("datosInvestigacion")
     .doc(docId)
     .update({ visible: newVisibility })
     .then(() => {
-      // Actualizar solo la fila afectada
-      label.classList.toggle('private');
-      label.querySelector('.fa-eye').classList.toggle('hidden');
-      label.querySelector('.fa-eye-slash').classList.toggle('hidden');
+      console.log("Visibilidad actualizada correctamente.");
     })
     .catch((error) => {
       console.error("Error al actualizar la visibilidad: ", error);
     });
 }
+
+
+function openEditModal(docId) {
+  db.collection("datosInvestigacion")
+    .doc(docId)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        document.getElementById("editTitulo").value = data.titulo || "";
+        document.getElementById("editArea").value = data.area || "";
+        document.getElementById("editDescripcion").value = data.descripcion || "";
+        document.getElementById("editRecomendacion").value = data.recomendacion || "";
+        document.getElementById("editForm").dataset.docId = doc.id;
+        
+        // Usamos la funcionalidad de Bootstrap para abrir el modal
+        const modal = new bootstrap.Modal(document.getElementById("editModal"));
+        modal.show();
+      }
+    })
+    .catch((error) => {
+      console.error("Error al cargar los datos para editar:", error);
+    });
+}
+
+document.getElementById("editForm").addEventListener("submit", async function (event) {
+  event.preventDefault();
+  const titulo = document.getElementById("editTitulo").value.trim();
+  const area = document.getElementById("editArea").value.trim();
+  const descripcion = document.getElementById("editDescripcion").value.trim();
+  const recomendacion = document.getElementById("editRecomendacion").value.trim();
+  const archivo = document.getElementById("editArchivo").files[0];
+  const imageFiles = Array.from(document.getElementById("editImages").files);
+  const docId = this.dataset.docId;
+
+  try {
+    const updatedData = { titulo, area, descripcion, recomendacion };
+    if (archivo) {
+      const archivoUrl = await uploadFile(archivo, "archivos");
+      updatedData.urlArchivo = archivoUrl;
+    }
+    if (imageFiles.length > 0) {
+      const imageUrls = await Promise.all(imageFiles.map((file) => uploadFile(file, "images")));
+      updatedData.urlImages = imageUrls;
+    }
+    await db.collection("datosInvestigacion").doc(docId).update(updatedData);
+    Swal.fire("¡Actualizado!", "Los cambios han sido guardados correctamente.", "success");
+    closeEditModal();
+    cargarCategorias(firebase.auth().currentUser);
+  } catch (error) {
+    console.error("Error al actualizar los datos:", error);
+    Swal.fire("Error", "No se pudo actualizar: " + error.message, "error");
+  }
+});
+
+async function uploadFile(file, folderPath) {
+  const storageRef = firebase.storage().ref();
+  const fileRef = storageRef.child(`${folderPath}/${file.name}`);
+  await fileRef.put(file);
+  return fileRef.getDownloadURL();
+}
+
+function closeEditModal() {
+  const modalElement = document.getElementById("editModal");
+  const modal = bootstrap.Modal.getInstance(modalElement); // ✅ esta es la clave
+  if (modal) modal.hide(); // Solo si existe la instancia activa
+
+  const form = document.getElementById("editForm");
+  form.reset(); // Restablecer el formulario
+  form.dataset.docId = ""; // Limpiar el docId
+}
+
+
+// Evento para cerrar el modal al hacer clic en la "X"
+document.getElementById("closeEditModal").addEventListener("click", () => {
+  closeEditModal();
+});
+
+// Evento para el botón de cancelar en el modal de edición
+document.getElementById("cancelEdit").addEventListener("click", () => {
+  closeEditModal();
+});
+
+
+// Eventos para cerrar modales
+document.getElementById("closeModal").addEventListener("click", closeModal);
+
+window.addEventListener("click", function(event) {
+  const modal = document.getElementById("modal"); // Modal de imágenes
+  const editModal = document.getElementById("editModal"); // Modal de edición
+  if (event.target === modal) {
+    closeModal(); // Cerrar el modal de imágenes
+  }
+  if (event.target === editModal) {
+    closeEditModal(); // Cerrar el modal de edición
+  }
+});
+
+document.getElementById("closeModal").addEventListener("click", function() {
+  document.getElementById("modal").style.display = "none"; // Ocultar modal al hacer clic en la "X"
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const editModalEl = document.getElementById('editModal');
+
+  if (editModalEl) {
+    editModalEl.addEventListener('hidden.bs.modal', () => {
+      console.log('Modal de edición cerrado');
+    });
+  }
+});
+
+
+function descargarArchivo(nombre, url) {
+  fetch(url)
+    .then(resp => {
+      if (!resp.ok) {
+        throw new Error("No se pudo descargar el archivo.");
+      }
+      return resp.blob();
+    })
+    .then(blob => {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = nombre;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    })
+    .catch(err => {
+      console.error("Error al descargar:", err);
+      Swal.fire("Error", "No se pudo descargar el archivo.", "error");
+    });
+}
+
+function getExtensionFromUrl(url) {
+  const match = url.match(/\.([a-zA-Z0-9]+)(\?|$)/);
+  return match ? match[1] : "file";
+}
+
+
+function showInvestigation(button) {
+  // Obtener el ID de la investigación desde el atributo data-id del botón
+  var idInvestigacion = button.getAttribute('data-id');
+  
+  // Construir la URL de la página de comentarios, añadiendo el ID de la investigación
+  var urlComment = 'commentInvestigation.html?id=' + idInvestigacion;
+  
+  // Redirigir a la página correspondiente
+  window.location.href = urlComment;
+}
+

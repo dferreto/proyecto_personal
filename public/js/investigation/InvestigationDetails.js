@@ -188,14 +188,7 @@ function construirDetallesInvestigacion(
         <!-- Right Column, ajustado a col-md-3 para igualar al de la DISCIPLINA Column -->
 <div class="col-md-3">
 <div class="d-flex flex-column h-100 fade-in-cardRight">
-<!-- CONCLUSIÓN Card -->
-<div class="card shadow mb-2 flex-fill"> <!-- mb-2 para un pequeño margen entre los cards -->
-  <div class="card-header alert-link">CONCLUSIÓN:
-  </div>
-  <div class="card-body">
-  <p> ${datosInvestigacion.conclusion}</p>
-  </div>
-</div>
+
 <!-- RECOMENDACIÓN Card -->
 <div class="card shadow flex-fill mt-3 fade-in-cardRight">
   <div class="card-header alert-link">RECOMENDACIÓN:</div>
