@@ -17,10 +17,19 @@ window.addEventListener('load', function () {
     }
 });
 
-// Asignar el listener al botón de inicio de sesión
-btnLogin.addEventListener('click', function () {
-    const email = txtEmail.value;
-    const password = txtContra.value;
+// Función principal para manejar el inicio de sesión
+function handleLogin() {
+    const email = txtEmail.value.trim();
+    const password = txtContra.value.trim();
+
+    if (!email || !password) {
+        Swal.fire({
+            icon: "error",
+            title: "Campos vacíos",
+            text: "Por favor, completa todos los campos.",
+        });
+        return;
+    }
 
     auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -82,6 +91,17 @@ btnLogin.addEventListener('click', function () {
                 icon: 'error'
             });
         });
+}
+
+// Asignar el listener al botón de inicio de sesión
+btnLogin.addEventListener('click', handleLogin);
+
+// Agregar listener para la tecla Enter en los campos de entrada
+document.addEventListener('keydown', function (event) {
+    // Verificar si el evento ocurre en los campos de correo o contraseña
+    if (event.key === 'Enter' && (event.target === txtEmail || event.target === txtContra)) {
+        handleLogin(); // Llamar a la función de inicio de sesión
+    }
 });
 
 // Función para alternar la visibilidad de la contraseña

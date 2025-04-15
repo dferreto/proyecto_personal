@@ -1,111 +1,149 @@
-// JavaScript Document
-var db = firebase.apps[0].firestore();
-var container = firebase.apps[0].storage().ref();
 
-const txtTitulo = document.querySelector('#txtTitulo');
-const txtArea = document.querySelector('#txtArea');
-const txtDescription = document.querySelector('#txtDescripcion');
-const txtUrlImage = document.querySelector('#txtUrlImage');
-const txtUrlPdf = document.querySelector('#txtUrlPdf');
-const txtConclusion = document.querySelector('#txtConclusion');
-const txtRecomendacion = document.querySelector('#txtRecomendacion');
-const btnLoad = document.querySelector('#btnLoad');
+document.getElementById("addInvestForm").addEventListener("submit", async function (event) {
+  event.preventDefault();
 
-btnLoad.addEventListener('click', function() {
-    let archivos = txtUrlImage.files;
-    let archivoPdf = txtUrlPdf.files[0];
-    let urlsSubidas = [];
-    let user = firebase.auth().currentUser;
+  // Mostrar el spinner
+  toggleSpinner(true);
 
-    if (!user) {
-        alert('Usuario no autenticado. Por favor, inicie sesión.');
-        return;
+  try {
+    // Obtener los datos del formulario
+    const titulo = document.getElementById("newTitulo").value.trim();
+    const area = document.getElementById("newArea").value.trim();
+    const descripcion = document.getElementById("newDescripcion").value.trim();
+    const recomendacion = document.getElementById("newRecomendacion").value.trim();
+    const archivoFile = document.getElementById("newUrlArchivo").files[0];
+    const imageFiles = Array.from(document.getElementById("newUrlImage").files);
+
+    // Validar tipo de archivo
+    const tiposPermitidos = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "text/plain"
+    ];
+
+    if (archivoFile && !tiposPermitidos.includes(archivoFile.type)) {
+      Swal.fire({
+        title: "Archivo no válido",
+        text: "El archivo debe ser PDF, Word o TXT.",
+        icon: "warning",
+        confirmButtonText: "Aceptar"
+      });
+      toggleSpinner(false); // Ocultar spinner en caso de error
+      return;
     }
 
-    if (!archivoPdf) {
-        alert('Debe seleccionar un archivo PDF.');
-        return;
-    } else if (archivos.length < 1) {
-        alert('Debe seleccionar al menos cuatro imágenes.');
-        return;
-    } else if (archivos.length > 6) {
-        alert('No puede seleccionar más de seis imágenes.');
-        return;
+    // Guardar en Firebase
+    const newData = {
+      titulo,
+      area,
+      descripcion,
+      recomendacion,
+      userId: firebase.auth().currentUser.uid, // Guardar el ID del usuario
+      visible: true, // Por defecto, visible
+    };
+
+    // Crear una alerta con barra de carga
+    let swalInstance;
+    if (archivoFile || imageFiles.length > 0) {
+      swalInstance = Swal.fire({
+        title: "Cargando...",
+        html: `
+          <div class="custom-progress-container">
+            <div id="swalProgressBar" class="custom-progress-bar"></div>
+          </div>
+          <p class="mt-3 custom-loading-text">Subiendo archivos...</p>
+        `,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          const progressBar = document.querySelector("#swalProgressBar");
+          if (progressBar) {
+            progressBar.style.width = "0%";
+          }
+        },
+      });
     }
 
-    // Crear una ruta personalizada con el ID del usuario y el título de la investigación
-    const rutaPersonalizada = `investigacion/${user.uid}/${txtTitulo.value}`;
-
-    let imagenDeSubida = Array.from(archivos).map(archivo => {
-        const nomarch = archivo.name;
-        const metadata = {
-            contentType: archivo.type
-        };
-
-        // Subir imagen a la ruta personalizada
-        return container.child(rutaPersonalizada + '/' + nomarch).put(archivo, metadata)
-            .then(snapshot => snapshot.ref.getDownloadURL())
-            .then(url => {
-                urlsSubidas.push(url);
-            });
-    });
-
-    let pdfSubido = null;
-    if (archivoPdf) {
-        const nomarchPdf = archivoPdf.name;
-        const metadataPdf = {
-            contentType: archivoPdf.type
-        };
-
-        // Subir PDF a la ruta personalizada
-        pdfSubido = container.child(rutaPersonalizada + '/' + nomarchPdf).put(archivoPdf, metadataPdf)
-            .then(snapshot => snapshot.ref.getDownloadURL());
+    if (archivoFile) {
+      const archivoUrl = await uploadFileWithProgress(archivoFile, "archivos", swalInstance);
+      newData.urlArchivo = archivoUrl;
     }
 
-    Promise.all([...imagenDeSubida, pdfSubido].filter(Boolean)).then(results => {
-        const urlPdf = results[results.length - 1]; // El último es el PDF
+    if (imageFiles.length > 0) {
+      const imageUrls = await Promise.all(
+        imageFiles.map(file => uploadFileWithProgress(file, "images", swalInstance))
+      );
+      newData.urlImages = imageUrls;
+    }
 
-        // Guardar la información en Firestore
-        db.collection("datosInvestigacion").add({
-            "userId": user.uid,
-            "titulo": txtTitulo.value,
-            "area": txtArea.value,
-            "descripcion": txtDescription.value,
-            "urlImages": urlsSubidas,
-            "urlPdf": urlPdf,
-            "conclusion": txtConclusion.value,
-            "recomendacion": txtRecomendacion.value,
-            "visible": true  // Investigación pública por defecto
-        }).then(function(docRef) {
-            Swal.fire({
-                title: '¡Éxito!',
-                text: 'ID del registro: ' + docRef.id,
-                icon: 'success'
-            });
-            document.location.href = 'investigation.html';
-            limpiar();
-        }).catch(function(FirebaseError) {
-            Swal.fire({
-                title: 'Error',
-                text: 'Error al guardar la información en Firestore: ' + FirebaseError,
-                icon: 'error'
-            });
-        });
-    }).catch(function(error) {
-        Swal.fire({
-            title: 'Error',
-            text: 'Error al subir las imágenes o el PDF: ' + error,
-            icon: 'error'
-        });
-    });
+    // Guardar los datos en Firestore
+    await db.collection("datosInvestigacion").add(newData);
+
+    // Cerrar la barra de carga y mostrar mensaje de éxito
+    if (swalInstance) {
+      swalInstance.close();
+    }
+    Swal.fire("¡Agregado!", "La investigación se ha agregado correctamente.", "success");
+
+    // Cerrar el modal y limpiar el formulario
+    closeAddInvestModal();
+
+    // Recargar las categorías
+    cargarCategorias(firebase.auth().currentUser);
+  } catch (error) {
+    console.error("Error al agregar investigación: ", error);
+    Swal.fire("Error", "No se pudo agregar la investigación. Intenta de nuevo.", "error");
+  } finally {
+    // Ocultar el spinner al finalizar
+    toggleSpinner(false);
+  }
 });
 
-function limpiar() {
-    txtTitulo.value = '';
-    txtArea.value = '';
-    txtDescription.value = '';
-    txtUrlImage.value = '';
-    txtUrlPdf.value = '';
-    txtConclusion.value = '';
-    txtRecomendacion.value = '';
+// Función para subir archivos con barra de progreso
+async function uploadFileWithProgress(file, folderPath, swalInstance) {
+  const storageRef = firebase.storage().ref();
+  const fileRef = storageRef.child(`${folderPath}/${file.name}`);
+  const uploadTask = fileRef.put(file);
+
+  return new Promise((resolve, reject) => {
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        if (swalInstance) {
+          const progressBar = document.querySelector("#swalProgressBar");
+          if (progressBar) {
+            progressBar.style.width = `${progress}%`;
+          }
+        }
+      },
+      (error) => {
+        reject(error);
+      },
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+          resolve(url);
+        });
+      }
+    );
+  });
+}
+
+// Función para cerrar el modal de agregar investigación
+function closeAddInvestModal() {
+  const modalElement = document.getElementById("addInvestModal");
+  const modal = bootstrap.Modal.getInstance(modalElement);
+  if (modal) modal.hide(); // Cerrar el modal
+
+  // Limpiar el formulario
+  const form = document.getElementById("addInvestForm");
+  form.reset();
+}
+
+function toggleSpinner(show = true) {
+  const spinner = document.getElementById("loadingSpinner");
+  if (spinner) {
+    spinner.classList.toggle("d-none", !show);
+  }
 }

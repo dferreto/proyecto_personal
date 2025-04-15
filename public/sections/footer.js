@@ -10,7 +10,6 @@ class Footer extends HTMLElement {
         <p class="text-left">
           <strong>Costa Rica, Puntarenas.</strong><br/>
           <strong>Email:</strong> <a href="mailto:ferretomoraga22@outlook.com?subject=Solicito información" class="text-light">ferretomoraga22@outlook.com</a><br />
-          <strong>Teléfono:</strong> 7181-7325
         </p>
       </div>
       <div class="col-md-4 mb-3 div_pc">

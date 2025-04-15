@@ -52,33 +52,33 @@ document.querySelector('#filtroGrado').addEventListener('change', cargarCategori
 
 function construirTarjetaInvestigacion(datosInvestigacion, idInvestigacion, gradoAcademico) {
     if (!idInvestigacion) {
-        console.error('ID no encontrado para la investigación', datosInvestigacion);
-        return ''; // Salir si no hay ID
+      console.error('ID no encontrado para la investigación', datosInvestigacion);
+      return ''; // Salir si no hay ID
     }
     var urlComment = 'commentInvestigation.html?id=' + idInvestigacion;
-
+  
     // Aquí construyes el HTML de la tarjeta usando los datos de la investigación y el ID
     return `
-   <div class="col-md-4">
-    <div class="card mb-4 shadow-sm clickable-card" data-id="${idInvestigacion}">
-        <div class="card-header-custom">
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm clickable-card card1" data-id="${idInvestigacion}">
+          <div class="card-header-custom">
             <h5 class="card-title"><a href="${urlComment}">${datosInvestigacion.titulo}</a></h5>
-        </div>
-        <div class="card-body-custom">
+          </div>
+          <div class="card-body-custom">
             <div class="d-flex align-items-center mb-2">
-                <i class="fas fa-graduation-cap me-2"></i>
-                <h6 class="card-subtitle">Grado: ${gradoAcademico}</h6>
+              <i class="fas fa-graduation-cap me-2"></i>
+              <h6 class="card-subtitle">Grado: ${gradoAcademico}</h6>
             </div>
             <div class="d-flex align-items-center mb-2">
-                <i class="fas fa-book me-2"></i>
-                <h6 class="card-subtitle">Área: ${datosInvestigacion.area}</h6>
+              <i class="fas fa-book me-2"></i>
+              <h6 class="card-subtitle">Área: ${datosInvestigacion.area}</h6>
             </div>
             <p class="card-text">${datosInvestigacion.descripcion}</p>
+          </div>
         </div>
-    </div>
-</div>
-`;
-}
+      </div>
+    `;
+  }
 
 // Agregamos un evento para cargar las investigaciones cuando el documento esté listo
 document.addEventListener('DOMContentLoaded', cargarCategorias);

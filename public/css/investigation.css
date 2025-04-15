@@ -1,23 +1,20 @@
+/* Importar fuente */
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
 /* Estilo del cuerpo */
 body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  flex-direction: column; /* Alinea los elementos verticalmente */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
-  font-family: Arial, sans-serif;
-  overflow: hidden; /* Evita desbordamientos */
-  overflow-y: auto; /* Permite scroll vertical */
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+  overflow-y: auto;
   overflow-x: hidden;
   background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
 }
-
-
-/* Importar fuente */
-@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
 /* Restablecer estilos globales */
 * {
@@ -29,14 +26,14 @@ body {
 
 /* Sección de ondas */
 section {
-  position: fixed; /* Fija la sección en la pantalla */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  z-index: -1; /* Asegura que las ondas estén detrás del contenido */
-  pointer-events: none; /* Evita que las ondas interfieran con clics u otros eventos */
+  z-index: -1;
+  pointer-events: none;
 }
 
 section .wave {
@@ -60,11 +57,10 @@ section .wave span {
   background: #000;
 }
 
-
 section .wave span:nth-child(1) {
   border-radius: 45%;
-  background: rgba(20, 20, 20, 0.8); /* Menor opacidad */
-  animation: animate 50s linear infinite; /* Velocidad más lenta */
+  background: rgba(20, 20, 20, 0.8);
+  animation: animate 50s linear infinite;
 }
 
 section .wave span:nth-child(2) {
@@ -89,82 +85,87 @@ section .wave span:nth-child(3) {
   }
 }
 
-
-/* Contenedor de la tabla para evitar desbordamientos */
-.table-container {
-  width: 100%;
-  overflow-x: auto; /* Ya no es necesario en la consulta de medios */
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos responsivos para tablas en pantallas pequeñas */
-@media (max-width: 768px) {
-  .table-responsive {
-    overflow-x: auto;
-  }
-
-  
-
- /* Contenedor de la tabla */
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-  max-height: 70vh; /* Establece una altura máxima y permite el desplazamiento vertical */
-  overflow-y: auto; /* Permite el desplazamiento vertical */
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
 /* Estilo de la tabla */
 .table {
   width: 100%;
-  table-layout: fixed;
-  background-color: #1a1a2e; /* Fondo oscuro para la tabla */
-  color: white; /* Texto en color blanco */
+  background-color: #1a1a2e;
+  color: white;
   border-collapse: collapse;
 }
 
-/* Estilo para las celdas */
-.table th, .table td {
-  border: 1px solid #2e2e4f; /* Bordes oscuros */
-  padding: 12px;
+/* Ajustes generales para todas las celdas */
+td {
   text-align: center;
+  vertical-align: middle;
+  font-size: 0.9rem;
+  overflow: hidden; /* Oculta el texto que desborda */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos para texto largo */
+}
+
+/* Ajustes de columnas específicas */
+td.descripcion,
+td.conclusion,
+td.recomendacion {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Permite el salto de línea */
+}
+/* Ancho específico para algunas columnas */
+/* Ancho específico para algunas columnas */
+.table td:nth-child(3) { /* Descripción */
+  width: 30%; /* Ajusta el ancho según sea necesario */
+}
+.table td:nth-child(6) { /* Conclusión */
+  width: 15%;
+}
+.table td:nth-child(7) { /* Recomendación */
+  width: 15%;
 }
 
 /* Encabezados de la tabla */
-.table thead {
-  background-color: #0f3460; /* Azul oscuro */
+.table th {
+  background-color: #0f3460;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap; /* Evita que los encabezados se rompan */
 }
 
-/* Filas impares para mejor visibilidad */
+/* Filas impares y hover */
+/* Filas impares y hover */
 .table tbody tr:nth-child(odd) {
-  background-color: #16213e; /* Azul oscuro */
+  background-color: #16213e;
 }
-
-/* Filas al pasar el cursor */
 .table tbody tr:hover {
   background-color: #1b3a69;
 }
 
-/* Estilo para las filas de la tabla en pantallas pequeñas */
+
+/* Contenedor de la tabla */
+.table-container {
+  width: 100%;
+  max-height: 70vh;
+  overflow-x: auto; /* Habilita el desplazamiento horizontal si es necesario */
+  overflow-y: auto; /* Habilita el desplazamiento vertical si es necesario */
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* Mejoras de responsividad */
 @media (max-width: 768px) {
   .table-responsive {
     overflow-x: auto;
   }
-
+  /* Oculta los encabezados de la tabla en la vista móvil */
   .table thead {
-    display: none; /* Oculta los encabezados en pantallas pequeñas */
+    display: none;
   }
-
+  /* Estilo para el encabezado de la tabla */
   .table tbody tr {
     display: block;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     padding: 10px;
   }
-
   .table tbody tr td {
     display: flex;
     justify-content: space-between;
@@ -172,25 +173,39 @@ section .wave span:nth-child(3) {
     padding: 8px;
     font-size: 0.8rem;
   }
-}
-
   .table tbody tr td::before {
     content: attr(data-label);
     font-weight: bold;
     text-transform: uppercase;
   }
-
-  .table tbody tr td button {
-    font-size: 0.8rem;
-  }
-
-  .visibility-checkbox {
-    width: 24px; /* Aumentar tamaño en móviles */
-    height: 24px;
-  }
 }
 
-/* Botón de agregar investigación */
+.table thead {
+  background-color: #0f3460;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #16213e;
+}
+
+.table tbody tr:hover {
+  background-color: #1b3a69;
+}
+
+
+
+
+/* Imágenes en tabla */
+.categoria-imagen {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  margin: 5px;
+  display: inline-block;
+}
+
+/* Botón agregar investigación */
 .add-investigation {
   background: linear-gradient(to right, #007bff, #4b9cd3);
   border: none;
@@ -206,7 +221,7 @@ section .wave span:nth-child(3) {
 .add-investigation:hover,
 .add-investigation:focus {
   background: linear-gradient(to right, #0069d9, #3a87c2);
-  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3); /* Sombra más suave */
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
   transform: translateY(-2px);
 }
 
@@ -215,124 +230,381 @@ section .wave span:nth-child(3) {
   box-shadow: 0 1px 3px rgba(0, 123, 255, 0.5);
 }
 
-/* Imágenes dentro de la tabla */
-.categoria-imagen {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover; /* Asegura que la imagen se recorte sin distorsionar */
-  border-radius: 5px;
-  margin: 5px;
-  display: inline-block;
-}
-
-/* Ajustes para las celdas de la tabla */
-td {
-  text-align: center;
-  vertical-align: middle;
-  padding: 12px; /* Un poco más de espacio */
-  font-size: 0.9rem; /* Aumentar ligeramente el tamaño de la fuente */
-}
-
-/* Evitar que el texto desborde en columnas específicas */
-td.descripcion, td.conclusion, td.recomendacion {
-  word-wrap: break-word;
-  max-width: 150px;
-  white-space: normal;
-}
-
-/* Estilos de la modal */
+/* Modal */
 .modal {
-  display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 1055;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding-top: 50px;
+  background: rgba(0, 0, 0, 0.6); /* más suave */
+  backdrop-filter: blur(6px); /* efecto blur moderno */
+  display: none;
+  animation: fadeIn 0.4s ease forwards;
 }
 
-/* Contenido de la modal */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 10px;
-  border: 1px solid #888;
+  background: linear-gradient(to bottom right, #1f2937, #111827);
+  color: #ffffff;
+  margin: 5% auto;
+  padding: 20px 30px;
+  border-radius: 15px;
+  border: 1px solid #2d3748;
   width: 70%;
   max-width: 600px;
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.25);
+  animation: slideIn 0.4s ease forwards;
   position: relative;
   max-height: 80vh;
   overflow-y: auto;
-  border-radius: 8px;
 }
 
-/* Imágenes dentro de la modal */
 .modal-image-content {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
   margin-bottom: 10px;
   object-fit: contain;
-}
-
-/* Botón de cierre de la modal */
-.close {
-  color: #aaa;
-  font-size: 28px;
-  font-weight: bold;
-  position: absolute;
-  top: 10px;
-  right: 25px;
-  cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-}
-
-/* Sombra y bordes en imágenes dentro de la modal */
-.modal-image-content {
-  max-width: 100%;
-  height: auto;
   margin: 5px;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo del contenedor */
+.close {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+  color: #00b4ff;
+  outline: none;
+}
+
+/* Formulario modal */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-form label {
+  color: #cbd5e1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #555555;
+}
+
+.form-control {
+  border: 1px solid #374151;
+}
+
+
+.form-control:focus {
+  border-color: #00b4ff;
+  box-shadow: 0 0 5px rgba(0, 180, 255, 0.4);
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+/* Botón de acción */
+/* Botón principal (Mostrar) */
+.btn-primary {
+  background: linear-gradient(to right, #007bff, #4b9cd3);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.5);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background: linear-gradient(to right, #0069d9, #3a87c2);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+  transform: translateY(-2px);
+}
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0, 123, 255, 0.5);
+}
+
+/* Botón de éxito (Editar) */
+.btn-outline-success {
+  background: transparent;
+  border: 2px solid #00c851;
+  color: #00c851;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.btn-outline-success:hover {
+  background: #00c851;
+  color: white;
+}
+
+/* Botón de peligro (Borrar) */
+.btn-outline-danger {
+  background: transparent;
+  border: 2px solid #dc3545;
+  color: #dc3545;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.btn-outline-danger:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* Animación entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos responsivos */
+
+/* Mejora en la accesibilidad */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #007bff;
+}
+
+[aria-label] {
+  cursor: pointer;
+}
+
+.custom-modal-header {
+  background: linear-gradient(to right, #06702a, #0a5322); /* Verde-menta suave a celeste muy claro */
+  color: #1b4332; /* Un verde oscuro para contraste */
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+.btn-success {
+  background: linear-gradient(to right, #00c851, #007e33);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 10px rgba(0, 255, 100, 0.4);
+}
+
+.btn-success:hover {
+  background: linear-gradient(to right, #00a244, #005c25);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 255, 100, 0.6);
+}
+
+/* Animación de pulsación */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0px rgba(0, 255, 100, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 255, 100, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0px rgba(0, 255, 100, 0.4);
+  }
+}
+
+
+/* Estilo para las flechas del carrusel fuera de la imagen pero dentro de la modal */
+.carousel-control-prev, .carousel-control-next {
+  position: absolute;
+  top: 50%; /* Centrar verticalmente */
+  transform: translateY(-50%); /* Ajustar para que se centren perfectamente */
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+  z-index: 10; /* Asegura que las flechas estén encima de las imágenes */
+  width: 30px; /* Tamaño de las flechas */
+  height: 30px; /* Tamaño de las flechas */
+}
+
+/* Flecha izquierda */
+.carousel-control-prev {
+  left: -30px; /* Desplazar la flecha fuera de la imagen a la izquierda */
+}
+
+/* Flecha derecha */
+.carousel-control-next {
+  right: -30px; /* Desplazar la flecha fuera de la imagen a la derecha */
+}
+
+/* Iconos de las flechas (blancas y sin fondo) */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: transparent; /* Sin fondo */
+  border: none; /* Sin borde */
+  color: white !important; /* Flechas de color blanco fijo */
+}
+
+.carousel-control-prev-icon::before, .carousel-control-next-icon::before {
+  content: ''; /* Asegura que no se añadan elementos adicionales */
+  font-family: 'bootstrap-icons'; /* Usar iconos predeterminados */
+  color: white !important; /* Asegurar que el color sea blanco fijo */
+}
+
+
+/* Contenedor principal */
+#tablaCateg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px;
+}
+
+/* Estilo general para las tarjetas */
+.card {
+  width: 100%;
+  max-width: 300px; /* Ancho máximo para tarjetas */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #1a1a2e;
+  color: white;
+  padding: 15px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card.hidden {
+  display: none; /* Ocultar tarjetas privadas */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Título de la tarjeta */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Texto de la tarjeta */
+.card-text {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.card-text strong {
+  font-weight: bold;
+  color: #00b4ff;
+}
+
+/* Botones de acción */
+.card .btn-primary,
+.card .btn-outline-success,
+.card .btn-outline-danger {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+
+/* Mejoras de responsividad */
+/* Estilo del ícono del ojo */
+
+
+.hidden {
+  display: none;
+}
+
 .visibility-label {
   font-size: 24px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  transition: all 0.3s ease;
 }
 
-/* Estilo por defecto (ojo abierto) */
 .visibility-label .fa-eye {
-  color: #007bff;
+  color: #007bff; /* Azul */
 }
 
 .visibility-label .fa-eye-slash {
-  color: #dc3545;
-  display: none; /* Inicialmente el ojo tachado no se muestra */
+  color: #dc3545; /* Rojo */
+  display: none;
 }
 
-/* Cuando el estado de visibilidad es privado, mostramos el ojo tachado */
 .visibility-label.private .fa-eye {
-  display: none; /* Ocultamos el ojo abierto */
+  display: none;
 }
 
 .visibility-label.private .fa-eye-slash {
-  display: inline; /* Mostramos el ojo tachado */
+  display: inline;
 }
 
-/* Asegurar enfoque visible en el botón de cierre */
-.close:focus {
-  outline: 2px solid #007bff; /* Añadir contorno visible cuando esté enfocado */
-  color: #0056b3;
+
+
+/* Contenedor personalizado para la barra de progreso */
+.custom-progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: #e9ecef; /* Fondo claro */
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+/* Barra de progreso animada */
+.custom-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #0d6efd, #17a2b8); /* Degradado azul-cian */
+  transition: width 0.3s ease-in-out; /* Animación suave */
+  border-radius: 5px;
+}
+
+/* Texto de carga */
+.custom-loading-text {
+  font-size: 1rem;
+  color: #495057; /* Color gris oscuro */
+  text-align: center;
+  margin-top: 15px;
+  font-weight: 500;
 }
